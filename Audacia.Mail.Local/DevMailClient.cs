@@ -39,10 +39,10 @@ namespace Audacia.Mail.Local
 				case ServerType.None:
 					break;
 				case ServerType.Papercut:
-					await Papercut.LaunchAsync().ConfigureAwait(false);
+					await Launcher.LaunchAsync("papercut").ConfigureAwait(false);
 					break;
 				case ServerType.Smtp4dev:
-					await Smtp4dev.LaunchAsync().ConfigureAwait(false);
+					await Launcher.LaunchAsync("smtp4dev").ConfigureAwait(false);
 					break;
 				default: throw new NotSupportedException("Specified server type is not implemented.");
 			}

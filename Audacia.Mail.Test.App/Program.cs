@@ -11,7 +11,7 @@ namespace Audacia.Mail.Test.App
 		[SuppressMessage("ReSharper", "CA1308", Justification = "Strings are not being normalised.")]
 		private static async Task Main()
 		{
-			var localMailer = new DevMailClient(ServerType.Papercut);
+			var localMailer = new DevMailClient(ServerType.Smtp4dev);
 
 			using (localMailer)
 			{
