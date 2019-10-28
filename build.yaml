@@ -1,0 +1,14 @@
+name: $(Build.BuildId).$(Year:yy)$(DayOfYear)
+trigger: [master]
+pr: { branches: { include: [master] } }
+schedules: [ { cron: "0 0 * * *", displayName: Nightly Build, branches: { include: [ master ] } } ]
+resources: { repositories: [ { repository: templates, type: git, name: Audacia/Audacia.Build } ] }
+
+stages:
+  - stage: Build
+    displayName: Build
+    jobs: [ { template: pipelines/build/nuget-package.job.yaml@templates } ]
+
+  - stage: Release
+    displayName: Release
+    jobs: [ { template: pipelines/release/internal-nuget-package.job.yaml@templates } ]

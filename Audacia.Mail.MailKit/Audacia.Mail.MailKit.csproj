@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Copyright>Copyright © Audacia 2019</Copyright>
+		<PackageIconUrl>https://www.audacia.co.uk/media/pkenoobu/audacia-logo-circle-blue.png</PackageIconUrl>
+		<PackageVersion>0.0.0</PackageVersion>
+		<Description>Mailkit implementations for the Audacia.Mail interface.</Description>
+		<CodeAnalysisRuleSet>../CodeAnalysis.ruleset</CodeAnalysisRuleSet>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<DocumentationFile>bin\Release\Audacia.Mail.MailKit.xml</DocumentationFile>
+		<WarningsAsErrors>NU1605;CS1591</WarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+		<DocumentationFile>bin\Debug\Audacia.Mail.MailKit.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Audacia.Mail\Audacia.Mail.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Audacia.CodeAnalysis" Version="0.0.47995.19275" />
+	  <PackageReference Include="MailKit" Version="2.3.2" />
+	</ItemGroup>
+
+</Project>
