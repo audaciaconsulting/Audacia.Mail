@@ -19,12 +19,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Audacia.Mail\Audacia.Mail.csproj" />
+		<ProjectReference Include="..\Audacia.Mail\Audacia.Mail.csproj"/>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Audacia.CodeAnalysis" Version="0.0.47995.19275" />
-	  <PackageReference Include="MailKit" Version="2.3.2" />
+		<PackageReference Include="Audacia.CodeAnalysis" Version="0.0.47995.19275">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="MailKit" Version="2.3.2"/>
 	</ItemGroup>
 
 </Project>
