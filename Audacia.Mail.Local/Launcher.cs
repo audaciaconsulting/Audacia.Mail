@@ -15,7 +15,9 @@ namespace Audacia.Mail.Local
 			if (launchSuccessful) return;
 
 			if (!Chocolatey.IsInstalled)
+			{
 				Chocolatey.Install();
+			}
 
 			var installed = Cmd.Execute($"choco install {name} -y");
 			if (!installed) throw new PlatformNotSupportedException($"Failed to install {name}.");
