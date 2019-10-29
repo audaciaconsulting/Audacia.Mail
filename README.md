@@ -1,20 +1,18 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+## Audacia.Mail
+Standardized interfaces for common email-sending functionality. The library with this name contains all of the interfaces and types used by the implementations.
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+### Usage
+This set of libraries facilitates the sending of emails through a standard set of interfaces. Several different implementations are provided:
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+#### `Audacia.Mail.Local`
+Sends email to the local machine to be captured by a locally hosted SMTP server such as [Papercut](https://github.com/changemakerstudios/papercut) or [smtp4dev](https://github.com/rnwood/smtp4dev).
+This library can automatically install (if needed) and start the specified SMTP server when debugging. Papercut is recommended as it doesn't require any configuration whereas smtp4dev needs authentication disabled in order to work.
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+#### `Audacia.Mail.MailKit`
+This library uses standard SMTP protocol to send mails, implemented with MailKit.
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+#### `Audacia.Mail.Mailtrap`
+Send mail to the Mailtrap server for testing purposes. Uses the MailKit SMTP implementation.
+
+#### `Audacia.Mail.SendGrid`
+Send mail using the SendGrid API.

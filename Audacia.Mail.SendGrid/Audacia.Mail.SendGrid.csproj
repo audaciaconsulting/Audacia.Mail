@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Copyright>Copyright © Audacia 2019</Copyright>
+		<PackageIconUrl>https://www.audacia.co.uk/media/pkenoobu/audacia-logo-circle-blue.png</PackageIconUrl>
+		<PackageVersion>0.0.0</PackageVersion>
+		<Description>SendGrid implementations of the Audacia.Mail interface</Description>
+		<CodeAnalysisRuleSet>../CodeAnalysis.ruleset</CodeAnalysisRuleSet>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<DocumentationFile>bin\Release\Audacia.Mail.SendGrid.xml</DocumentationFile>
+		<WarningsAsErrors>NU1605;CS1591</WarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+		<DocumentationFile>bin\Debug\Audacia.Mail.SendGrid.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Audacia.CodeAnalysis" Version="0.0.47995.19275" />
+	  <PackageReference Include="Sendgrid" Version="9.12.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Audacia.Mail\Audacia.Mail.csproj" />
+	</ItemGroup>
+
+</Project>
