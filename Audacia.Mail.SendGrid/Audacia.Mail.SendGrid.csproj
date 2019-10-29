@@ -19,12 +19,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Audacia.CodeAnalysis" Version="0.0.47995.19275" />
-	  <PackageReference Include="Sendgrid" Version="9.12.0" />
+		<PackageReference Include="Audacia.CodeAnalysis" Version="0.0.47995.19275">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Sendgrid" Version="9.12.0"/>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Audacia.Mail\Audacia.Mail.csproj" />
+		<ProjectReference Include="..\Audacia.Mail\Audacia.Mail.csproj"/>
 	</ItemGroup>
 
 </Project>
