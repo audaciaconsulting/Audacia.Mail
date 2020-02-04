@@ -11,7 +11,8 @@ namespace Audacia.Mail.MailTrap
 			{
 				Host = "smtp.mailtrap.io",
 				UserName = username,
-				Password = password
+				Password = password,
+				Port = 587
 			};
 		}
 
