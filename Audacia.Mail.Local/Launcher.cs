@@ -19,7 +19,7 @@ namespace Audacia.Mail.Local
 				Chocolatey.Install();
 			}
 
-			var installed = Cmd.Execute($"choco install {name} -y");
+			var installed = Cmd.Execute($"choco install {name} -y", true);
 			if (!installed) throw new PlatformNotSupportedException($"Failed to install {name}.");
 
 			await StartProcessAsync(name).ConfigureAwait(false);
@@ -27,7 +27,7 @@ namespace Audacia.Mail.Local
 
 		private static async Task<bool> StartProcessAsync(string name)
 		{
-			var launchSuccessful = Cmd.Execute(name);
+			var launchSuccessful = Cmd.Execute(name, false);
 			if (!launchSuccessful) return false;
 
 			var iterations = 0;
