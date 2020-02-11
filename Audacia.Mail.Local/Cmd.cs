@@ -5,7 +5,7 @@ namespace Audacia.Mail.Local
 {
 	internal static class Cmd
 	{
-		public static bool Execute(string command)
+		public static bool Execute(string command, bool asAdmin)
 		{
 			var process = new Process
 			{
@@ -15,7 +15,7 @@ namespace Audacia.Mail.Local
 					WindowStyle = ProcessWindowStyle.Hidden,
 					FileName = "cmd.exe",
 					Arguments = "/C " + command,
-					Verb = "runas"
+					Verb = asAdmin ? "runas" : null
 				}
 			};
 
