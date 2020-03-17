@@ -35,10 +35,8 @@ namespace Audacia.Mail
             using (var ms = new MemoryStream())
             {
                 stream.CopyTo(ms);
-                msg.Attachments.Add(new MailAttachment(filename, mimeType, ms.ToArray()));
+                return msg.Attach(ms.ToArray(), filename, mimeType);
             }
-
-            return msg;
         }
 
         /// <summary>
