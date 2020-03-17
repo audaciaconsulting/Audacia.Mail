@@ -16,5 +16,8 @@ namespace Audacia.Mail
 
         /// <summary>The port through which to connect to the host.</summary>
         public int Port { get; set; }
+
+        /// <summary>The address to be used when no sender is provided on the email.</summary>
+        public string DefaultSender { get; set; }
     }
 }

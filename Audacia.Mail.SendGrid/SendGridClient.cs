@@ -14,7 +14,15 @@ namespace Audacia.Mail.SendGrid
 			_client = new global::SendGrid.SendGridClient(apiKey);
 		}
 
+		/// <summary>Initializes a new instance of the <see cref="SendGridClient"/> class.</summary>
+        public SendGridClient(string apiKey, string defaultSender)
+			: this(apiKey)
+		{
+			_defaultSender = defaultSender;
+		}
+
         private readonly global::SendGrid.SendGridClient _client;
+        private readonly string _defaultSender;
 
 		/// <inheritdoc />
         public void Dispose()
@@ -31,6 +39,12 @@ namespace Audacia.Mail.SendGrid
         public Task SendAsync(MailMessage message)
 		{
 			if (message == null) throw new ArgumentNullException(nameof(message));
+
+			if (string.IsNullOrWhiteSpace(message.Sender?.Address) &&
+               !string.IsNullOrWhiteSpace(_defaultSender))
+            {
+                message.Sender = new MailAddress(_defaultSender);
+            }
 
 			var sendGridMessage = new SendGridMessage
 			{
