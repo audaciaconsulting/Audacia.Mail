@@ -10,6 +10,20 @@ namespace Audacia.Mail
     public static class MailMessageExtensions
     {
         /// <summary>
+        /// Attaches the given file data to the mail message.
+        /// </summary>
+        public static MailMessage Attach(this MailMessage msg, byte[] bytes, string filename, string mimeType)
+        {
+            if (msg == null) throw new ArgumentNullException(nameof(msg));
+
+            if (bytes == null) throw new ArgumentNullException(nameof(bytes));
+
+            msg.Attachments.Add(new MailAttachment(filename, mimeType, bytes));
+
+            return msg;
+        }
+
+        /// <summary>
         /// Attaches the given file stream to the mail message.
         /// </summary>
         public static MailMessage Attach(this MailMessage msg, Stream stream, string filename, string mimeType)
