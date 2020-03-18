@@ -17,6 +17,16 @@ namespace Audacia.Mail.MailTrap
 		}
 
         /// <summary>Initializes a new instance of the <see cref="MailtrapClient"/> class.</summary>
-		public MailtrapClient(string username, string password) : base(GetSettings(username, password)) { }
+		public MailtrapClient(string username, string password)
+			: base(GetSettings(username, password))
+		{
+		}
+
+        /// <summary>Initializes a new instance of the <see cref="MailtrapClient"/> class.</summary>
+		public MailtrapClient(string username, string password, string defaultSender)
+			: this(username, password)
+		{
+			DefaultSender = defaultSender;
+		}
 	}
 }

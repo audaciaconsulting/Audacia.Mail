@@ -11,9 +11,11 @@ namespace Audacia.Mail.Local
 		public ServerType ServerType { get; }
 
         /// <summary>Initializes a new instance of the <see cref="DevMailClient"/> class.</summary>
-		public DevMailClient(ServerType serverType, int port = 25) : base(GetSettings(port))
+		public DevMailClient(ServerType serverType, int port = 25, string defaultSender = null)
+			: base(GetSettings(port))
 		{
 			ServerType = serverType;
+			DefaultSender = defaultSender;
 
 			if (serverType == ServerType.Smtp4dev)
 			{

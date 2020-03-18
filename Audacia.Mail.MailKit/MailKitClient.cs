@@ -15,6 +15,9 @@ namespace Audacia.Mail.MailKit
     /// <seealso cref="IMailClient" />
     public class MailKitClient : IMailClient
     {
+        /// <summary>The address to be used when no sender is provided on the email.</summary>
+        public string DefaultSender { get; protected set; }
+
         /// <summary>the username to authenticate with.</summary>
         public string UserName { get; protected set; }
 
@@ -39,6 +42,7 @@ namespace Audacia.Mail.MailKit
             Port = settings.Port;
             UserName = settings.UserName;
             Password = settings.Password;
+            DefaultSender = settings.DefaultSender;
         }
 
         /// <summary>Initializes a new instance of the <see cref="MailKitClient"/>, then connects and authenticates with the SMTP server.</summary>
@@ -69,6 +73,12 @@ namespace Audacia.Mail.MailKit
         {
             if (message == null) throw new ArgumentNullException(nameof(message));
 
+            if (string.IsNullOrWhiteSpace(message.Sender?.Address) &&
+               !string.IsNullOrWhiteSpace(DefaultSender))
+            {
+                message.Sender = new MailAddress(DefaultSender);
+            }
+
             var mimeMessage = CreateMimeMessage(message);
 
             if (!_client.IsConnected)
@@ -89,6 +99,12 @@ namespace Audacia.Mail.MailKit
         public virtual async Task SendAsync(MailMessage message)
         {
             if (message == null) throw new ArgumentNullException(nameof(message));
+
+            if (string.IsNullOrWhiteSpace(message.Sender?.Address) &&
+               !string.IsNullOrWhiteSpace(DefaultSender))
+            {
+                message.Sender = new MailAddress(DefaultSender);
+            }
 
             var mimeMessage = CreateMimeMessage(message);
 

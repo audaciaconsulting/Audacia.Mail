@@ -39,5 +39,10 @@ namespace Audacia.Mail
         /// <summary>Gets or sets the body of the email message.</summary>
         /// <value>The body.</value>
         public string Body { get; set; }
+
+        /// <summary>
+        /// Creates an empty mail message.
+        /// </summary>
+        public static MailMessage Create() => new MailMessage();
     }
 }
