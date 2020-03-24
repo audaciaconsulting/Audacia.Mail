@@ -153,18 +153,15 @@ namespace Audacia.Mail.MailKit
 
             foreach (var attachment in mailMessage.Attachments)
             {
-                using (var memoryStream = new MemoryStream(attachment.Bytes.ToArray()))
+                var part = new MimePart(attachment.ContentType)
                 {
-                    var part = new MimePart(attachment.ContentType)
-                    {
-                        Content = new MimeContent(memoryStream),
-                        ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
-                        ContentTransferEncoding = ContentEncoding.Base64,
-                        FileName = attachment.FileName
-                    };
+                    Content = new MimeContent(new MemoryStream(attachment.Bytes.ToArray())),
+                    ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+                    ContentTransferEncoding = ContentEncoding.Base64,
+                    FileName = attachment.FileName
+                };
 
-                    body.Add(part);
-                }
+                body.Add(part);
             }
 
             var sender = new MailboxAddress(mailMessage.Sender.Name, mailMessage.Sender.Address);
