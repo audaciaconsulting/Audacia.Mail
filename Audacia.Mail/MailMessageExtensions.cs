@@ -98,7 +98,7 @@ namespace Audacia.Mail
             {
                 if (string.IsNullOrWhiteSpace(email)) continue;
 
-                msg.Recipients.Add(new MailAddress(email));
+                msg.Recipients.Add(new MailAddress(email.Trim()));
             }
 
             return msg;
@@ -131,7 +131,7 @@ namespace Audacia.Mail
             {
                 if (string.IsNullOrWhiteSpace(email)) continue;
 
-                msg.Cc.Add(new MailAddress(email));
+                msg.Cc.Add(new MailAddress(email.Trim()));
             }
 
             return msg;
@@ -164,7 +164,7 @@ namespace Audacia.Mail
             {
                 if (string.IsNullOrWhiteSpace(email)) continue;
 
-                msg.Bcc.Add(new MailAddress(email));
+                msg.Bcc.Add(new MailAddress(email.Trim()));
             }
 
             return msg;
@@ -177,7 +177,7 @@ namespace Audacia.Mail
         {
             if (msg == null) throw new ArgumentNullException(nameof(msg));
 
-            msg.Sender = new MailAddress(address);
+            msg.Sender = new MailAddress(address.Trim());
 
             return msg;
         }
@@ -194,7 +194,7 @@ namespace Audacia.Mail
             var recipients = addresses.Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (var email in recipients)
             {
-                collection.Add(new MailAddress(email));
+                collection.Add(new MailAddress(email.Trim()));
             }
         }
     }
