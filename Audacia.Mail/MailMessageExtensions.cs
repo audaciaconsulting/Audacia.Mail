@@ -32,9 +32,14 @@ namespace Audacia.Mail
 
             if (stream == null) throw new ArgumentNullException(nameof(stream));
 
+            if (!stream.CanRead) throw new ArgumentException("Unable to read from stream.", nameof(stream));
+
+            if (stream.Length <= stream.Position) throw new ArgumentOutOfRangeException(nameof(stream), "End of stream reached.");
+
             using (var ms = new MemoryStream())
             {
                 stream.CopyTo(ms);
+                stream.Position = 0;
                 return msg.Attach(ms.ToArray(), filename, mimeType);
             }
         }
