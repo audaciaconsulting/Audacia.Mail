@@ -96,6 +96,8 @@ namespace Audacia.Mail
             msg.Recipients.Clear();
             foreach (var email in recipients)
             {
+                if (string.IsNullOrWhiteSpace(email)) continue;
+
                 msg.Recipients.Add(new MailAddress(email));
             }
 
@@ -127,6 +129,8 @@ namespace Audacia.Mail
             msg.Cc.Clear();
             foreach (var email in recipients)
             {
+                if (string.IsNullOrWhiteSpace(email)) continue;
+
                 msg.Cc.Add(new MailAddress(email));
             }
 
@@ -158,6 +162,8 @@ namespace Audacia.Mail
             msg.Bcc.Clear();
             foreach (var email in recipients)
             {
+                if (string.IsNullOrWhiteSpace(email)) continue;
+
                 msg.Bcc.Add(new MailAddress(email));
             }
 
