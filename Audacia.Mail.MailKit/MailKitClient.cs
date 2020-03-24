@@ -143,7 +143,13 @@ namespace Audacia.Mail.MailKit
 
         private static MimeMessage CreateMimeMessage(MailMessage mailMessage)
         {
-            var body = new Multipart("mixed") { new TextPart(mailMessage.Format.ToString()) { Text = mailMessage.Body } };
+            var body = new Multipart("mixed")
+            {
+                new TextPart(mailMessage.Format.ToString())
+                {
+                    Text = mailMessage.Body ?? string.Empty
+                }
+            };
 
             foreach (var attachment in mailMessage.Attachments)
             {
