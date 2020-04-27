@@ -20,6 +20,8 @@ ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audacia.Mail.Log", "Audacia.Mail.Log\Audacia.Mail.Log.csproj", "{EE577F2F-0757-46BA-B2F1-0C3E0BC67370}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,5 +52,9 @@ Global
 		{98A1DD94-8FED-411F-B00E-4CC6AD6FBED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98A1DD94-8FED-411F-B00E-4CC6AD6FBED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98A1DD94-8FED-411F-B00E-4CC6AD6FBED7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE577F2F-0757-46BA-B2F1-0C3E0BC67370}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE577F2F-0757-46BA-B2F1-0C3E0BC67370}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE577F2F-0757-46BA-B2F1-0C3E0BC67370}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE577F2F-0757-46BA-B2F1-0C3E0BC67370}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
