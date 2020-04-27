@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace Audacia.Mail.Log
 {
@@ -31,7 +32,15 @@ namespace Audacia.Mail.Log
         /// <returns>A completed Task.</returns>
         public Task SendAsync(MailMessage message)
         {
-            var logMessage = $"Sending email: {JsonConvert.SerializeObject(message)}";
+            var logMessageBuilder = new StringBuilder();
+
+            logMessageBuilder.AppendLine("Sending email");
+            logMessageBuilder.AppendLine($"Subject: {message.Subject}");
+            logMessageBuilder.AppendLine($"Sender: {message.Sender.Address}");
+            logMessageBuilder.AppendLine($"Recipients: {string.Join(",", message.Recipients.Select(r => r.Address))}");
+            logMessageBuilder.AppendLine($"Body: {message.Body}");
+
+            var logMessage = logMessageBuilder.ToString();
 
             if (_loggingAction == null)
             {
