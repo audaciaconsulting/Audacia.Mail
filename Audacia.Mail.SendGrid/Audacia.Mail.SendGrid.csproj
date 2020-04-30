@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<Copyright>Copyright © Audacia 2019</Copyright>
 		<PackageIconUrl>https://www.audacia.co.uk/media/pkenoobu/audacia-logo-circle-blue.png</PackageIconUrl>
-		<PackageVersion>0.0.0</PackageVersion>
+		<PackageVersion>1.0.0</PackageVersion>
 		<Description>SendGrid implementations of the Audacia.Mail interface</Description>
 		<CodeAnalysisRuleSet>../CodeAnalysis.ruleset</CodeAnalysisRuleSet>
 		<TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
