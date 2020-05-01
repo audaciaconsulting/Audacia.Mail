@@ -5,7 +5,7 @@
 		<TargetFramework>netcoreapp2.2</TargetFramework>
 		<Copyright>Copyright © Audacia 2019</Copyright>
 		<PackageIconUrl>https://www.audacia.co.uk/media/pkenoobu/audacia-logo-circle-blue.png</PackageIconUrl>
-		<PackageVersion>0.0.0</PackageVersion>
+		<PackageVersion>1.0.0</PackageVersion>
 		<IsPackable>false</IsPackable>
 		<CodeAnalysisRuleSet>../CodeAnalysis.ruleset</CodeAnalysisRuleSet>
 	</PropertyGroup>
