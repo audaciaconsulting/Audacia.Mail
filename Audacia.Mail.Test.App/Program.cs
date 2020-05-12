@@ -11,7 +11,7 @@ namespace Audacia.Mail.Test.App
         [SuppressMessage("ReSharper", "CA1308", Justification = "Strings are not being normalised.")]
         private static async Task Main()
         {
-            var localMailer = new LogClient((message) =>
+            var localMailer = new LogMailClient((message) =>
             {
                 Console.WriteLine(message);
             });

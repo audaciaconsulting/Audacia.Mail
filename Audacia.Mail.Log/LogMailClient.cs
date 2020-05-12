@@ -6,27 +6,31 @@ using System.Threading.Tasks;
 namespace Audacia.Mail.Log
 {
     /// <summary>
-    /// Logs an email either to the console, or if configured to a sink.
+    /// Logs an email to a specified sink.
     /// </summary>
-    public class LogClient : IMailClient
+    public class LogMailClient : IMailClient
     {
         private readonly Action<string> _loggingAction;
 
+        public static IMailClient Console()
+        {
+            return new ConsoleLogMailClient();
+        }
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="LogClient"/> class.
+        /// Initializes a new instance of the <see cref="LogMailClient"/> class.
         /// </summary>
         /// <param name="loggingAction">
-        /// Optional action that is called with the email
-        /// if you want to log it differently that via the console.
+        /// Action that is called to log the email.
         /// For example, you could use Serilog to log the email or you could write to a file.
         /// </param>
-        public LogClient(Action<string> loggingAction)
+        public LogMailClient(Action<string> loggingAction)
         {
             _loggingAction = loggingAction;
         }
 
         /// <summary>
-        /// Log an email to the console or configured sink.
+        /// Log an email using the configured action.
         /// </summary>
         /// <param name="message">The email to log.</param>
         /// <returns>A completed Task.</returns>
@@ -42,14 +46,7 @@ namespace Audacia.Mail.Log
 
             var logMessage = logMessageBuilder.ToString();
 
-            if (_loggingAction == null)
-            {
-                Console.WriteLine(logMessage);
-            }
-            else
-            {
-                _loggingAction.Invoke(logMessage);
-            }
+            _loggingAction.Invoke(logMessage);
 
             return Task.CompletedTask;
         }
