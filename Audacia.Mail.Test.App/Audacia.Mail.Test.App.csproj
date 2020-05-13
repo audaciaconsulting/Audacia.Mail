@@ -18,14 +18,15 @@
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
 		<DocumentationFile>bin\Debug\Audacia.Mail.Test.App.Log.xml</DocumentationFile>
 	</PropertyGroup>
-	
+
 	<ItemGroup>
-	  <ProjectReference Include="..\Audacia.Mail.Local\Audacia.Mail.Local.csproj" />
+		<ProjectReference Include="..\Audacia.Mail.Local\Audacia.Mail.Local.csproj" />
+		<ProjectReference Include="..\Audacia.Mail.Log\Audacia.Mail.Log.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Audacia.CodeAnalysis" Version="0.0.63551.20078" />
-	  <PackageReference Include="Audacia.Random" Version="3.0.55181.19352" />
+		<PackageReference Include="Audacia.CodeAnalysis" Version="0.0.63551.20078" />
+		<PackageReference Include="Audacia.Random" Version="3.0.55181.19352" />
 	</ItemGroup>
 
 </Project>

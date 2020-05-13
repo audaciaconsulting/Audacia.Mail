@@ -10,12 +10,12 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-		<DocumentationFile>bin\Release\Audacia.Log.xml</DocumentationFile>
+		<DocumentationFile>bin\Release\Audacia.Mail.xml</DocumentationFile>
 		<WarningsAsErrors>NU1605;CS1591</WarningsAsErrors>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-		<DocumentationFile>bin\Debug\Audacia.Log.xml</DocumentationFile>
+		<DocumentationFile>bin\Debug\Audacia.Mail.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
