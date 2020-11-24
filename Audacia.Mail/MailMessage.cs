@@ -1,10 +1,18 @@
+using System;
 using System.Collections.Generic;
+using static Audacia.Mail.MailMessageExtensions;
 
 namespace Audacia.Mail
 {
     /// <summary>An email message, sent via SMTP.</summary>
     public class MailMessage
     {
+        //private string _subject;
+        private MailFormat _format = MailFormat.Plain;
+        private MailAddress _sender = new MailAddress();
+        //private IList<MailAddress> _recipients = new List<MailAddress>();
+        //private IList<MailAddress> _cc;
+
         /// <summary>Initializes a new instance of the <see cref="MailMessage"/> class.</summary>
         public MailMessage(params string[] recipients)
         {
@@ -14,14 +22,45 @@ namespace Audacia.Mail
             }
         }
 
+        ///// <summary>Gets or sets the message subject.</summary>
+        //public string Subject
+        //{
+        //    get { return _subject; }
+
+        //    //Not sure should have null check here.
+        //    set
+        //    {
+        //        if (value == null) throw new ArgumentNullException(nameof(value));
+        //        _subject = value;
+        //    }
+        //}
+
         /// <summary>Gets or sets the message subject.</summary>
         public string Subject { get; set; }
 
         /// <summary>The format for the text in this message.</summary>
-        public MailFormat Format { get; set; } = MailFormat.Plain;
+        public MailFormat Format
+        {
+            get { return _format; }
+
+            set
+            {
+                if (value == null) throw new ArgumentNullException(nameof(value));
+                _format = value;
+            }
+        }
 
         /// <summary>Gets the sender addresses.</summary>
-        public MailAddress Sender { get; set; } = new MailAddress();
+        public MailAddress Sender
+        {
+            get { return _sender; }
+
+            set
+            {
+                if (value == null) throw new ArgumentNullException(nameof(value));
+                _sender = new MailAddress(value.Address.Trim());
+            }
+        }
 
         /// <summary>Gets the recipient addresses.</summary>
         /// <value>The recipients.</value>
