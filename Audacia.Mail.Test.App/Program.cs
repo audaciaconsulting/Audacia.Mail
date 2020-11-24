@@ -42,11 +42,11 @@ namespace Audacia.Mail.Test.App
                     var message = new MailMessage
                     {
                         Format = MailFormat.Html,
-                        Sender =
-                        {
-                            Address = $"{forenames[0]}.{surnames[0]}@example.com".ToLowerInvariant(),
-                            Name = $"{forenames[0]} {surnames[0]}"
-                        },
+                        Sender = new MailAddress
+                            {
+                                Address = $"{forenames[0]}.{surnames[0]}@example.com".ToLowerInvariant(),
+                                Name = $"{forenames[0]} {surnames[0]}"
+                            },
                         Recipients =
                         {
                             new MailAddress

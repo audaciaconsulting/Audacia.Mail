@@ -7,11 +7,8 @@ namespace Audacia.Mail
     /// <summary>An email message, sent via SMTP.</summary>
     public class MailMessage
     {
-        //private string _subject;
         private MailFormat _format = MailFormat.Plain;
         private MailAddress _sender = new MailAddress();
-        //private IList<MailAddress> _recipients = new List<MailAddress>();
-        //private IList<MailAddress> _cc;
 
         /// <summary>Initializes a new instance of the <see cref="MailMessage"/> class.</summary>
         public MailMessage(params string[] recipients)
@@ -21,19 +18,6 @@ namespace Audacia.Mail
                 Recipients.Add(new MailAddress(recipient, recipient));
             }
         }
-
-        ///// <summary>Gets or sets the message subject.</summary>
-        //public string Subject
-        //{
-        //    get { return _subject; }
-
-        //    //Not sure should have null check here.
-        //    set
-        //    {
-        //        if (value == null) throw new ArgumentNullException(nameof(value));
-        //        _subject = value;
-        //    }
-        //}
 
         /// <summary>Gets or sets the message subject.</summary>
         public string Subject { get; set; }
