@@ -43,7 +43,7 @@ namespace Audacia.Mail
             {
                 if (value == null) throw new ArgumentNullException(nameof(value));
                 if (value.Address == null) throw new ArgumentNullException(nameof(value.Address));
-                _sender = new MailAddress(value.Address.Trim());
+                _sender = new MailAddress(value.Name, value.Address.Trim());
             }
         }
 
