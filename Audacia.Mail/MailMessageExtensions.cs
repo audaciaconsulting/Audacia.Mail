@@ -182,7 +182,7 @@ namespace Audacia.Mail
         {
             if (msg == null) throw new ArgumentNullException(nameof(msg));
 
-            msg.Sender = new MailAddress(address.Trim());
+            msg.Sender = new MailAddress(address);
 
             return msg;
         }
