@@ -5,8 +5,8 @@
 		<PackageIconUrl>https://www.audacia.co.uk/media/pkenoobu/audacia-logo-circle-blue.png</PackageIconUrl>
 		<PackageVersion>1.0.0</PackageVersion>
 		<Description>Mailkit implementations for the Audacia.Mail interface.</Description>
-		<CodeAnalysisRuleSet>../CodeAnalysis.ruleset</CodeAnalysisRuleSet>
-		<TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
+		<CodeAnalysisRuleSet></CodeAnalysisRuleSet>
+		<TargetFramework>netstandard2.0</TargetFramework>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -23,7 +23,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Audacia.CodeAnalysis" Version="0.0.63551.20078">
+		<PackageReference Include="Audacia.CodeAnalysis" Version="1.1.22019.3">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
