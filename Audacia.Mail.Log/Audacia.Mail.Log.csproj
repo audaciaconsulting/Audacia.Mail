@@ -1,8 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+      <TargetFramework>netstandard2.0</TargetFramework>
+      <PackageVersion>1.0.0</PackageVersion>
     </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Audacia.CodeAnalysis" Version="1.1.22019.3">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Audacia.Mail\Audacia.Mail.csproj" />

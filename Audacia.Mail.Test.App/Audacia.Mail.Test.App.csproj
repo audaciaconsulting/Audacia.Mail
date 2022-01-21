@@ -2,12 +2,12 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFramework>netcoreapp2.2</TargetFramework>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<Copyright>Copyright © Audacia 2019</Copyright>
 		<PackageIconUrl>https://www.audacia.co.uk/media/pkenoobu/audacia-logo-circle-blue.png</PackageIconUrl>
 		<PackageVersion>1.0.0</PackageVersion>
 		<IsPackable>false</IsPackable>
-		<CodeAnalysisRuleSet>../CodeAnalysis.ruleset</CodeAnalysisRuleSet>
+		<CodeAnalysisRuleSet></CodeAnalysisRuleSet>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -25,7 +25,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Audacia.CodeAnalysis" Version="0.0.63551.20078" />
+		<PackageReference Include="Audacia.CodeAnalysis" Version="1.1.22019.3">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Audacia.Random" Version="3.0.55181.19352" />
 	</ItemGroup>
 
