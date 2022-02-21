@@ -3,7 +3,7 @@ Standardized interfaces for common email-sending functionality. The library with
 
 ## Contents
 1. [Usage](#usage)
-2. [Implementations](#implementations)
+1. [Implementations](#implementations)
 
 ## Usage
 This set of libraries facilitates the sending of emails through a standard set of interfaces each implementing the IMailClient interface. Several different implementations are provided:
