@@ -2,8 +2,8 @@
 Standardized interfaces for common email-sending functionality. The library with this name contains all of the interfaces and types used by the implementations.
 
 ## Contents
-    1. [Usage](#usage)
-    2. [Implementations](#implementations)
+1. [Usage](#usage)
+2. [Implementations](#implementations)
 
 ## Usage
 This set of libraries facilitates the sending of emails through a standard set of interfaces each implementing the IMailClient interface. Several different implementations are provided:
@@ -21,7 +21,7 @@ public static IServiceCollection AddEmailServices(this IServiceCollection servic
         throw new ArgumentNullException(nameof(configuration));
     }
 
-    var smtpOptions = configuration.GetSection(EmailConfigurationSections.SmtpOptions).Get<"SmtpOptions">();
+    var smtpOptions = configuration.GetSection("SmtpOptions").Get<SmtpOptions>();
     var senderAddress = smtpOptions.FromEmailAddress != null
         ? new EmailSenderDetails(smtpOptions.FromEmailAddress)
         : new EmailSenderDetails();
@@ -91,7 +91,7 @@ private static IServiceCollection AddMailClient(this IServiceCollection services
 }
 ```
 
-As mentioned above the below example enum can be used to switch the `EmailClientType`. This is a class that can optionally be added to an application using `Audacia.Mail` to make it easier to configure different types. The exact values will depend on what email clients your project needs.
+As mentioned above the below example enum can be used to switch the `EmailClientType`. This is an enum that can optionally be added to an application using `Audacia.Mail` to make it easier to configure different types. The exact values will depend on what email clients your project needs.
 ```csharp
     // The type of email client being used, e.g. basic SMTP, local SMTP, MailTrap, etc.
     public enum EmailClientType
