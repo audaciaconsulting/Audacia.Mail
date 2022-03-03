@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+		<Copyright>Copyright © Audacia 2019</Copyright>
+		<PackageIconUrl>https://www.audacia.co.uk/media/pkenoobu/audacia-logo-circle-blue.png</PackageIconUrl>
+		<PackageVersion>1.0.43</PackageVersion>
+		<Description>Mailkit implementations for the Audacia.Mail interface.</Description>
+		<CodeAnalysisRuleSet></CodeAnalysisRuleSet>
+		<TargetFramework>netstandard2.0</TargetFramework>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="MandrillHelper.cs~RF4e295c9b.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Audacia.CodeAnalysis" Version="1.1.22027.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Audacia.Mail\Audacia.Mail.csproj" />
+  </ItemGroup>
+
+</Project>
