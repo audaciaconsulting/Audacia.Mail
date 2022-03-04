@@ -33,11 +33,11 @@ namespace Audacia.Mail.Mandrill.InternalModels
         /// </summary>
         public DateTime SendAt { get; set; }
 
-        public SendMessageRequest(string apiKey, MailMessage message)
+        public SendMessageRequest(string apiKey, MailMessage message, bool async)
         {
             Key = apiKey;
             Message = message;
-            Async = true;
+            Async = async;
             SendAt = DateTime.Now.AddMinutes(-1);
         }
     }

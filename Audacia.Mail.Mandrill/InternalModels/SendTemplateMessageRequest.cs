@@ -7,21 +7,21 @@ namespace Audacia.Mail.Mandrill
 {
     internal class SendTemplateMessageRequest : SendMessageRequest
     {
-        public SendTemplateMessageRequest(string apiKey, MailMessage message, List<MandrillTemplate> templates, string templateName) : base(apiKey, message)
+        public SendTemplateMessageRequest(string apiKey, MailMessage message, List<MandrillTemplate> templates, string templateName, bool async) : base(apiKey, message, async)
         {
             Message = message;
             TemplateContent = templates;
             TemplateName = templateName;
-            Async = true;
+            Async = async;
             SendAt = DateTime.Now.AddMinutes(-1);
         }
 
-        public SendTemplateMessageRequest(string apiKey, MailMessage message, string templateName) : base(apiKey, message)
+        public SendTemplateMessageRequest(string apiKey, MailMessage message, string templateName, bool async) : base(apiKey, message, async)
         {
             Message = message;
             TemplateContent = new List<MandrillTemplate>();
             TemplateName = templateName;
-            Async = true;
+            Async = async;
             SendAt = DateTime.Now.AddMinutes(-1);
         }
 
