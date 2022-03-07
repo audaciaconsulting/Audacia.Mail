@@ -36,7 +36,8 @@ namespace Audacia.Mail.Mandrill
         /// <inheritdoc />
         public async Task SendAsync(MailMessage message)
         {
-            var messageRequest = new SendMessageRequest(_options.ApiKey, message, _options.Async);
+            var mandrillMessage = new MandrillMailMessage(message);
+            var messageRequest = new SendMessageRequest(_options.ApiKey, mandrillMessage, _options.Async);
             await SendPostRequestAsync("messages/send", messageRequest);
         }
 
@@ -61,9 +62,10 @@ namespace Audacia.Mail.Mandrill
         /// <param name="templates">The list of <see cref="MandrillTemplate"/>'s to send.</param>
         public async Task<bool?> SendTemplateMessageAsync(MailMessage message, string templateName, List<MandrillTemplate> templates = null)
         {
+            var mandrillMessage = new MandrillMailMessage(message);
             var messageRequest = templates != null ?
-                new SendTemplateMessageRequest(_options.ApiKey, message, templates, templateName, _options.Async) :
-                new SendTemplateMessageRequest(_options.ApiKey, message, templateName, _options.Async);
+                new SendTemplateMessageRequest(_options.ApiKey, mandrillMessage, templates, templateName, _options.Async) :
+                new SendTemplateMessageRequest(_options.ApiKey, mandrillMessage, templateName, _options.Async);
             using (var result = await SendPostRequestAsync($"messages/send-template{_outputFormat}", messageRequest))
             {
                 return result.IsSuccessStatusCode;

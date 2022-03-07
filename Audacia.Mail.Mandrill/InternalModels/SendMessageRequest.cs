@@ -12,7 +12,7 @@ namespace Audacia.Mail.Mandrill.InternalModels
         /// <summary>
         /// Gets or sets the information to send
         /// </summary>
-        public MailMessage Message { get; set; }
+        public MandrillMailMessage Message { get; set; }
 
         /// <summary>
         /// Enable a background sending mode that is optimized for bulk sending.
@@ -33,7 +33,7 @@ namespace Audacia.Mail.Mandrill.InternalModels
         /// </summary>
         public DateTime SendAt { get; set; }
 
-        public SendMessageRequest(string apiKey, MailMessage message, bool async)
+        public SendMessageRequest(string apiKey, MandrillMailMessage message, bool async)
         {
             Key = apiKey;
             Message = message;
