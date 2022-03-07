@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Audacia.Mandrill.Models.WebhookJsonDeserialisation
 {
@@ -22,7 +22,7 @@ namespace Audacia.Mandrill.Models.WebhookJsonDeserialisation
         public List<string> Tags { get; set; }
 
         /// <summary>An item for details of each SMTP response.</summary>
-        [JsonProperty("Smtp_events")]
+        [JsonPropertyName("Smtp_events")]
         public List<WebhookSmtpDetailsItem> SmtpEvents { get; set; }
 
         /// <summary>An item for details of each time the message was opened.</summary>
@@ -38,11 +38,11 @@ namespace Audacia.Mandrill.Models.WebhookJsonDeserialisation
         public Dictionary<string, object> Metadata { get; set; }
 
         /// <summary>The ID of the event.</summary>
-        [JsonProperty("_id")]
+        [JsonPropertyName("_id")]
         public string Id { get; set; }
 
         /// <summary>The version of the email.</summary>
-        [JsonProperty("_version")]
+        [JsonPropertyName("_version")]
         public string Version { get; set; }
 
         /// <summary>The subaccount the message originated from.</summary>
@@ -52,7 +52,7 @@ namespace Audacia.Mandrill.Models.WebhookJsonDeserialisation
         public string Diag { get; set; }
 
         /// <summary>The description for bounced messages.</summary>
-        [JsonProperty("Bounce_description")]
+        [JsonPropertyName("Bounce_description")]
         public string BounceDescription { get; set; }
 
         /// <summary>The slug of the template used.</summary>

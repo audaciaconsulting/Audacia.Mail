@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text.Json;
 using Audacia.Mail.Mandrill.InternalModels.WebhookJsonDeserialisation;
-using Newtonsoft.Json;
 
 namespace Audacia.Mail.Mandrill
 {
@@ -10,11 +10,11 @@ namespace Audacia.Mail.Mandrill
     {
         public static IEnumerable<StringContent> SelectWebhooksToDelete(
             this IEnumerable<RetrievedWebhookItem> retrievedWebhookItems, string apiKey,
-            JsonSerializerSettings camelCaseSerialiserSettings) => retrievedWebhookItems.Select(existingWebhook => new StringContent(JsonConvert.SerializeObject(
+            JsonSerializerOptions options) => retrievedWebhookItems.Select(existingWebhook => new StringContent(JsonSerializer.Serialize(
                 new
             {
                 existingWebhook.Id,
                 Key = apiKey
-            }, camelCaseSerialiserSettings)));
+            }, options)));
     }
 }

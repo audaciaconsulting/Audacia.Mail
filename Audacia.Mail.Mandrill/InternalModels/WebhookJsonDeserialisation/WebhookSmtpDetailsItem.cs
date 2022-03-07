@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Audacia.Mandrill.Models.WebhookJsonDeserialisation
 {
@@ -14,11 +14,11 @@ namespace Audacia.Mandrill.Models.WebhookJsonDeserialisation
         public string Diag { get; set; }
 
         /// <summary>The remote IP address of the server Mandrill was connected to.</summary>
-        [JsonProperty("Destination_ip")]
+        [JsonPropertyName("Destination_ip")]
         public string DestinationIp { get; set; }
 
         /// <summary>The Mandrill IP address that was attempting to send the message.</summary>
-        [JsonProperty("Source_ip")]
+        [JsonPropertyName("Source_ip")]
         public string SourceIp { get; set; }
 
         /// <summary>The size of the message being relayed.</summary>

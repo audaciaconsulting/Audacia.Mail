@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Audacia.Mail.Mandrill.InternalModels;
 using Audacia.Mandrill.Models;
@@ -49,9 +50,8 @@ namespace Audacia.Mail.Mandrill
         /// <param name="obj">The object to get a json string from.</param>
         private async Task<HttpResponseMessage> SendPostRequestAsync<T>(string url, T obj)
         {
-            var test = MandrillHelper.GetJsonString(obj);
-            var response = await _client.PostAsync(url, new StringContent(test));
-            return response;
+            var jsonObject = JsonSerializer.Serialize(obj);
+            return await _client.PostAsync(url, new StringContent(jsonObject));
         }
 
         /// <summary>

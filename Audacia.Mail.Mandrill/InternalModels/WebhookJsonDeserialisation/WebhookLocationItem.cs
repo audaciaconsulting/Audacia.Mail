@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Audacia.Mandrill.Models.WebhookJsonDeserialisation
 {
@@ -6,11 +6,11 @@ namespace Audacia.Mandrill.Models.WebhookJsonDeserialisation
     public class WebhookLocationItem
     {
         /// <summary>Abbreviated name for the country.</summary>
-        [JsonProperty("Country_short")]
+        [JsonPropertyName("Country_short")]
         public string CountryShort { get; set; }
 
         /// <summary>Full name for the country.</summary>
-        [JsonProperty("Country_long")]
+        [JsonPropertyName("Country_long")]
         public string CountryLong { get; set; }
 
         /// <summary>Name for the region.</summary>
@@ -20,7 +20,7 @@ namespace Audacia.Mandrill.Models.WebhookJsonDeserialisation
         public string City { get; set; }
 
         /// <summary>Postal code for the event.</summary>
-        [JsonProperty("Postal_Code")]
+        [JsonPropertyName("Postal_Code")]
         public string PostalCode { get; set; }
 
         /// <summary>Timezone for the event.</summary>

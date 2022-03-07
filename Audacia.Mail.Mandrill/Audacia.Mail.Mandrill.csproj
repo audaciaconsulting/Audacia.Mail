@@ -4,7 +4,7 @@
 		<Copyright>Copyright © Audacia 2019</Copyright>
 		<PackageIconUrl>https://www.audacia.co.uk/media/pkenoobu/audacia-logo-circle-blue.png</PackageIconUrl>
 		<PackageVersion>1.1.0</PackageVersion>
-		<Description>Mailkit implementations for the Audacia.Mail interface.</Description>
+		<Description>Mandrill implementations for the Audacia.Mail interface.</Description>
 		<CodeAnalysisRuleSet></CodeAnalysisRuleSet>
 		<TargetFramework>netstandard2.0</TargetFramework>
 	</PropertyGroup>
@@ -18,7 +18,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Text.Json" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>

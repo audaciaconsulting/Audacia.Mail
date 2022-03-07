@@ -1,5 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Audacia.Mandrill.Models.WebhookJsonDeserialisation
 {
@@ -13,7 +13,7 @@ namespace Audacia.Mandrill.Models.WebhookJsonDeserialisation
         public WebhookMessageItem Msg { get; set; }
 
         /// <summary>The ID of the event.</summary>
-        [JsonProperty("_id")]
+        [JsonPropertyName("_id")]
         public string Id { get; set; }
 
         /// <summary>The UNIX timestamp of the event.</summary>
@@ -23,7 +23,7 @@ namespace Audacia.Mandrill.Models.WebhookJsonDeserialisation
         public string Ip { get; set; }
 
         /// <summary>If relevant, the browser or email client where the event occurred.</summary>
-        [JsonProperty("User_agent")]
+        [JsonPropertyName("User_agent")]
         public string UserAgent { get; set; }
 
         /// <summary>The URL of the sent link.</summary>
@@ -33,7 +33,7 @@ namespace Audacia.Mandrill.Models.WebhookJsonDeserialisation
         public WebhookLocationItem Location { get; set; }
 
         /// <summary>Parsed information for an open or click event.</summary>
-        [JsonProperty("User_agent_parsed")]
+        [JsonPropertyName("User_agent_parsed")]
         public WebhookParsedItem UserAgentParsed { get; set; }
     }
 

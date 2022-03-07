@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Audacia.Mandrill.Models.WebhookJsonDeserialisation
 {
@@ -9,58 +9,58 @@ namespace Audacia.Mandrill.Models.WebhookJsonDeserialisation
         public bool Mobile { get; set; }
 
         /// <summary>The operating system company.</summary>
-        [JsonProperty("Os_company")]
+        [JsonPropertyName("Os_company")]
         public string OsCompany { get; set; }
 
         /// <summary>Url of the operating system company.</summary>
-        [JsonProperty("Os_company_url")]
+        [JsonPropertyName("Os_company_url")]
         public string OsCompanyUrl { get; set; }
 
         /// <summary>The operating system family, eg Windows.</summary>
-        [JsonProperty("Os_family")]
+        [JsonPropertyName("Os_family")]
         public string OsFamily { get; set; }
 
         /// <summary>Url for an icon for the operating system.</summary>
-        [JsonProperty("Os_icon")]
+        [JsonPropertyName("Os_icon")]
         public string OsIcon { get; set; }
 
         /// <summary>The name of the operating system used for the event.</summary>
-        [JsonProperty("Os_name")]
+        [JsonPropertyName("Os_name")]
         public string OsName { get; set; }
 
         /// <summary>Url for the operating system.</summary>
-        [JsonProperty("Os_url")]
+        [JsonPropertyName("Os_url")]
         public string OsUrl { get; set; }
 
         /// <summary>The type of user agent, eg Browser.</summary>
         public string Type { get; set; }
 
         /// <summary>Company for the user agent.</summary>
-        [JsonProperty("Ua_company")]
+        [JsonPropertyName("Ua_company")]
         public string UaCompany { get; set; }
 
         /// <summary>Url for the user agent company.</summary>
-        [JsonProperty("Ua_company_url")]
+        [JsonPropertyName("Ua_company_url")]
         public string UaCompanyUrl { get; set; }
 
         /// <summary>Family for the user agent.</summary>
-        [JsonProperty("Ua_family")]
+        [JsonPropertyName("Ua_family")]
         public string UaFamily { get; set; }
 
         /// <summary>Url for an icon for the user agent.</summary>
-        [JsonProperty("Ua_icon")]
+        [JsonPropertyName("Ua_icon")]
         public string UaIcon { get; set; }
 
         /// <summary>Name of the user agent.</summary>
-        [JsonProperty("Ua_name")]
+        [JsonPropertyName("Ua_name")]
         public string UaName { get; set; }
 
         /// <summary>Url for the user agent.</summary>
-        [JsonProperty("Ua_url")]
+        [JsonPropertyName("Ua_url")]
         public string UaUrl { get; set; }
 
         /// <summary>Version of the user agent.</summary>
-        [JsonProperty("Os_version")]
+        [JsonPropertyName("Os_version")]
         public string OsVersion { get; set; }
     }
 }

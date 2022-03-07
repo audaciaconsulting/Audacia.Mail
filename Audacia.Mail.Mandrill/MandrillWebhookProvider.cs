@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
 using Audacia.Mail.Mandrill.InternalModels.WebhookJsonDeserialisation;
 using Audacia.Mandrill.Models.WebhookJsonDeserialisation;
 
@@ -25,16 +23,9 @@ namespace Audacia.Mail.Mandrill
             _options = options;
         }
 
-        private readonly JsonSerializerSettings _snakeCaseSerialiserSettings = new JsonSerializerSettings
+        private readonly JsonSerializerOptions _camelCaseSerialiserSettings = new JsonSerializerOptions
         {
-            ContractResolver = new DefaultContractResolver { NamingStrategy = new SnakeCaseNamingStrategy() }
-        };
-
-        private readonly JsonSerializerSettings _camelCaseSerialiserSettings = new JsonSerializerSettings
-        {
-            ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() },
-            Formatting = Formatting.Indented,
-            Converters = new JsonConverter[] { new StringEnumConverter(new CamelCaseNamingStrategy()) }
+            PropertyNameCaseInsensitive = true
         };
 
         /// <summary> Connect to Mandrill system, check if the Webhooks for sent emails are set up and create them if they are not </summary>
@@ -45,7 +36,7 @@ namespace Audacia.Mail.Mandrill
 
             // Get list of existing webhooks
             List<RetrievedWebhookItem> fetchedWebhookList;
-            using (var contentList = new StringContent(JsonConvert.SerializeObject(
+            using (var contentList = new StringContent(JsonSerializer.Serialize(
                 new
                 {
                     Key = _options.ApiKey
@@ -55,9 +46,8 @@ namespace Audacia.Mail.Mandrill
                 if (mandrillResponse.IsSuccessStatusCode)
                 {
                     var fetchedWebhookData = await mandrillResponse.Content.ReadAsStringAsync();
-                    fetchedWebhookList = JsonConvert.DeserializeObject<List<RetrievedWebhookItem>>(
-                        fetchedWebhookData,
-                        _snakeCaseSerialiserSettings);
+                    fetchedWebhookList = JsonSerializer.Deserialize<List<RetrievedWebhookItem>>(
+                        fetchedWebhookData);
                 }
                 else
                 {
@@ -91,7 +81,7 @@ namespace Audacia.Mail.Mandrill
 
         private async Task<bool> CreateNewWebhookAsync(string environmentUrl)
         {
-            using (var contentSend = new StringContent(JsonConvert.SerializeObject(
+            using (var contentSend = new StringContent(JsonSerializer.Serialize(
                 new
                 {
                     // Create new webhook for when emails are sent
@@ -109,7 +99,7 @@ namespace Audacia.Mail.Mandrill
         private async Task<bool> UpdateWebhookAsync(int webhookId, string environmentUrl)
         {
             // Update webhook for when emails are sent
-            using (var contentSend = new StringContent(JsonConvert.SerializeObject(
+            using (var contentSend = new StringContent(JsonSerializer.Serialize(
                 new
                 {
                     Id = webhookId,
