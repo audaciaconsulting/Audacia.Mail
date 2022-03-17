@@ -22,7 +22,6 @@ namespace Audacia.Mail.Mandrill
         private readonly MandrillOptions _options;
         private readonly MandrillWebhookProvider _webhookProvider;
         private readonly IMandrillService _mandrillService;
-        private readonly HttpClient _client;
 
         private readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions
         {
@@ -34,16 +33,13 @@ namespace Audacia.Mail.Mandrill
         /// Initializes a new instance of the <see cref="MandrillClient"/> class.
         /// </summary>
         /// <param name="options">The mandrill specific options needed to set up Mandrill client.</param>
-        public MandrillClient(MandrillOptions options)
+        public MandrillClient(MandrillOptions options, IMandrillService mandrillService)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options), "You need to setup MandrillOptions");
+            _mandrillService = mandrillService;
+            _webhookProvider = new MandrillWebhookProvider(mandrillService, _options);
             _jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-            _client = new HttpClient
-            {
-                BaseAddress = new Uri("https://mandrillapp.com/api/1.0/")
-            };
-            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            _webhookProvider = new MandrillWebhookProvider(_client, _options);
+            _webhookProvider = new MandrillWebhookProvider(_mandrillService, _options);
         }
 
         /// <inheritdoc />
@@ -62,11 +58,8 @@ namespace Audacia.Mail.Mandrill
         /// <param name="obj">The object to get a json string from.</param>
         private async Task<HttpResponseMessage> SendPostRequestAsync<T>(string url, T obj)
         {
-            var jsonObject = JsonSerializer.Serialize(obj);
-            return await _client.PostAsync(url, new StringContent(jsonObject));
             var json = JsonContent.Create(obj, new MediaTypeHeaderValue("application/json"), _jsonSerializerOptions);
-            var response = await _client.PostAsync(url, json);
-            var test = await response.Content.ReadAsStringAsync();
+            var response = await _mandrillService.HttpClient.PostAsync(url, json);
             return response;
         }
 

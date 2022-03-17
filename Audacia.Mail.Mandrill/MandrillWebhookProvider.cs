@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Audacia.Mail.Mandrill.InternalModels.WebhookJsonDeserialisation;
+using Audacia.Mail.Mandrill.Services;
 using Audacia.Mandrill.Models.WebhookJsonDeserialisation;
 
 namespace Audacia.Mail.Mandrill
@@ -14,12 +14,12 @@ namespace Audacia.Mail.Mandrill
     {
         private const string WebhookDescription = "Email Sent";
         private readonly MandrillOptions _options;
-        private readonly HttpClient _client;
+        private readonly IMandrillService _mandrillService;
         private static readonly EmailEventType[] _webhookTrigger = Enum.GetValues(typeof(EmailEventType)).Cast<EmailEventType>().Where(v => !v.Equals(EmailEventType.None)).ToArray();
 
-        public MandrillWebhookProvider(HttpClient client, MandrillOptions options)
+        public MandrillWebhookProvider(IMandrillService mandrillService, MandrillOptions options)
         {
-            _client = client;
+            _mandrillService = mandrillService;
             _options = options;
         }
 
@@ -32,8 +32,6 @@ namespace Audacia.Mail.Mandrill
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Maintainability", "ACL1002:Member or local function contains too many statements", Justification = "Setting up a web hook takes many statements.")]
         public async Task<bool> SetUpMandrillWebhookAsync(string environmentUrl)
         {
-            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
             // Get list of existing webhooks
             List<RetrievedWebhookItem> fetchedWebhookList;
             using (var contentList = new StringContent(JsonSerializer.Serialize(
@@ -41,7 +39,7 @@ namespace Audacia.Mail.Mandrill
                 {
                     Key = _options.ApiKey
                 }, _camelCaseSerialiserSettings)))
-            using (var mandrillResponse = await _client.PostAsync("webhooks/list", contentList))
+            using (var mandrillResponse = await _mandrillService.HttpClient.PostAsync("webhooks/list", contentList))
             {
                 if (mandrillResponse.IsSuccessStatusCode)
                 {
@@ -90,7 +88,7 @@ namespace Audacia.Mail.Mandrill
                     Description = WebhookDescription,
                     Events = _webhookTrigger
                 }, _camelCaseSerialiserSettings)))
-            using (var responseSend = await _client.PostAsync("webhooks/add", contentSend))
+            using (var responseSend = await _mandrillService.HttpClient.PostAsync("webhooks/add", contentSend))
             {
                 return responseSend.IsSuccessStatusCode;
             }
@@ -108,7 +106,7 @@ namespace Audacia.Mail.Mandrill
                     Description = WebhookDescription,
                     Events = _webhookTrigger
                 }, _camelCaseSerialiserSettings)))
-            using (var responseSend = await _client.PostAsync("webhooks/update", contentSend))
+            using (var responseSend = await _mandrillService.HttpClient.PostAsync("webhooks/update", contentSend))
             {
                 return responseSend.IsSuccessStatusCode;
             }
@@ -121,7 +119,7 @@ namespace Audacia.Mail.Mandrill
             // Delete each existing webhook
             foreach (var contentSend in webhooks.SelectWebhooksToDelete(_options.ApiKey, _camelCaseSerialiserSettings))
             {
-                using (var responseSend = await _client.PostAsync("webhooks/delete", contentSend))
+                using (var responseSend = await _mandrillService.HttpClient.PostAsync("webhooks/delete", contentSend))
                 {
                     if (!responseSend.IsSuccessStatusCode)
                     {
