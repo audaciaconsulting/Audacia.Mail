@@ -39,7 +39,7 @@ namespace Audacia.Mail.Mandrill
                 {
                     Key = _options.ApiKey
                 }, _camelCaseSerialiserSettings)))
-            using (var mandrillResponse = await _mandrillService.HttpClient.PostAsync("webhooks/list", contentList))
+            using (var mandrillResponse = await _mandrillService.SendEmailAsync("webhooks/list", contentList))
             {
                 if (mandrillResponse.IsSuccessStatusCode)
                 {
@@ -88,7 +88,7 @@ namespace Audacia.Mail.Mandrill
                     Description = WebhookDescription,
                     Events = _webhookTrigger
                 }, _camelCaseSerialiserSettings)))
-            using (var responseSend = await _mandrillService.HttpClient.PostAsync("webhooks/add", contentSend))
+            using (var responseSend = await _mandrillService.SendEmailAsync("webhooks/add", contentSend))
             {
                 return responseSend.IsSuccessStatusCode;
             }
@@ -106,7 +106,7 @@ namespace Audacia.Mail.Mandrill
                     Description = WebhookDescription,
                     Events = _webhookTrigger
                 }, _camelCaseSerialiserSettings)))
-            using (var responseSend = await _mandrillService.HttpClient.PostAsync("webhooks/update", contentSend))
+            using (var responseSend = await _mandrillService.SendEmailAsync("webhooks/update", contentSend))
             {
                 return responseSend.IsSuccessStatusCode;
             }
@@ -119,7 +119,7 @@ namespace Audacia.Mail.Mandrill
             // Delete each existing webhook
             foreach (var contentSend in webhooks.SelectWebhooksToDelete(_options.ApiKey, _camelCaseSerialiserSettings))
             {
-                using (var responseSend = await _mandrillService.HttpClient.PostAsync("webhooks/delete", contentSend))
+                using (var responseSend = await _mandrillService.SendEmailAsync("webhooks/delete", contentSend))
                 {
                     if (!responseSend.IsSuccessStatusCode)
                     {

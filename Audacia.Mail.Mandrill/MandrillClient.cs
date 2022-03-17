@@ -59,7 +59,7 @@ namespace Audacia.Mail.Mandrill
         private async Task<HttpResponseMessage> SendPostRequestAsync<T>(string url, T obj)
         {
             var json = JsonContent.Create(obj, new MediaTypeHeaderValue("application/json"), _jsonSerializerOptions);
-            var response = await _mandrillService.HttpClient.PostAsync(url, json);
+            var response = await _mandrillService.SendEmailAsync(url, json);
             return response;
         }
 

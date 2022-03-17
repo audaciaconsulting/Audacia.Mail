@@ -1,9 +1,10 @@
 ﻿using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Audacia.Mail.Mandrill.Services
 {
     public interface IMandrillService
     {
-        HttpClient HttpClient { get; set; }
+        Task<HttpResponseMessage> SendEmailAsync(string requestUri, HttpContent content);
     }
 }
