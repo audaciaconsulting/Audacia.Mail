@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace Audacia.Mail.Mandrill
 {
@@ -31,36 +32,43 @@ namespace Audacia.Mail.Mandrill
         /// <summary>
         /// Gets or sets list of recipients for message.
         /// </summary>
+        [JsonPropertyName("to")]
         public List<MandrillMailAddress> To { get; set; }
 
         /// <summary>
         /// Gets or sets a list of attachments for message.
         /// </summary>
+        [JsonPropertyName("attachments")]
         public List<MandrillMailAttachment> Attachments { get; set; }
 
         /// <summary>
         /// Gets or sets the sender email address.
         /// </summary>
+        [JsonPropertyName("from_email")]
         public string FromEmail { get; set; }
 
         /// <summary>
         /// Gets or sets the sender name.
         /// </summary>
+        [JsonPropertyName("from_name")]
         public string FromName { get; set; }
 
         /// <summary>
         /// Gets or sets the message subject.
         /// </summary>
+        [JsonPropertyName("subject")]
         public string Subject { get; set; }
 
         /// <summary>
         /// Gets or sets the full HTML content to be sent.
         /// </summary>
+        [JsonPropertyName("html")]
         public string Html { get; set; }
 
         /// <summary>
         /// Gets or sets the full text content to be sent.
         /// </summary>
+        [JsonPropertyName("text")]
         public string Text { get; set; }
     }
 }

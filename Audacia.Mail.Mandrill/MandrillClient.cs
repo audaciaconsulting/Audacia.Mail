@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Audacia.Mail.Mandrill.InternalModels;
+using Audacia.Mail.Mandrill.Services;
 using Audacia.Mandrill.Models;
 
 namespace Audacia.Mail.Mandrill
@@ -16,8 +20,15 @@ namespace Audacia.Mail.Mandrill
     {
         private const string _outputFormat = ".json";
         private readonly MandrillOptions _options;
-        private readonly HttpClient _client;
         private readonly MandrillWebhookProvider _webhookProvider;
+        private readonly IMandrillService _mandrillService;
+        private readonly HttpClient _client;
+
+        private readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MandrillClient"/> class.
@@ -26,6 +37,7 @@ namespace Audacia.Mail.Mandrill
         public MandrillClient(MandrillOptions options)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options), "You need to setup MandrillOptions");
+            _jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             _client = new HttpClient
             {
                 BaseAddress = new Uri("https://mandrillapp.com/api/1.0/")
@@ -52,6 +64,10 @@ namespace Audacia.Mail.Mandrill
         {
             var jsonObject = JsonSerializer.Serialize(obj);
             return await _client.PostAsync(url, new StringContent(jsonObject));
+            var json = JsonContent.Create(obj, new MediaTypeHeaderValue("application/json"), _jsonSerializerOptions);
+            var response = await _client.PostAsync(url, json);
+            var test = await response.Content.ReadAsStringAsync();
+            return response;
         }
 
         /// <summary>
@@ -92,10 +108,6 @@ namespace Audacia.Mail.Mandrill
         /// </param>
         protected virtual void Dispose(bool disposing) 
         {
-            if (disposing)
-            {
-                _client.Dispose();
-            }
         }
     }
 }
