@@ -291,3 +291,86 @@ public class ConsoleLogMailClient : LogMailClient
 
 ### `Audacia.Mail.Noop`
 This client doesn't do anything with the email that is sent.
+
+### `Audacia.Mail.Mandrill`
+Send emails using the Mandrill (Mailchimp) API.
+
+Mandrill is different to the other `IMailClient` implementations above as it uses a `HttpClient` to send api calls to the api address.
+
+Due to this it has more configuration needed to be able to use it, if you are using Mandrill just for SMTP it is best to use MailKit instead as it needs less configuration to get working.
+
+Firstly the MandrillService is needed to be added via the IServiceCollection to allow for dependency injection. There is already an extension within the Mandrill library called `AddMandrillServiceCollection` 
+as seen below.
+```csharp
+public static class MandrillServiceCollectionExtensions
+{
+    public static IServiceCollection AddMandrillServiceCollection(this IServiceCollection services)
+    {
+        return services.AddHttpClient<IMandrillService, MandrillService>(client =>
+        {
+            client.BaseAddress = new Uri("https://mandrillapp.com/api/1.0/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        }).Services;
+    }
+}
+```
+
+Mandrill uses `MandrillOptions` instead of the `SmtpSettings` to set up various properties for sending a Mandrill API `Post` request. Similarly to the `SmtpSettings` these can be configured using the 
+`appsetting.json` like in the section [Configuring The Email Library](#configuring-the-email-library). 
+```csharp
+public class MandrillOptions
+{
+    public string FromEmail { get; set; }
+
+    public string FromName { get; set; }
+
+    public string ApiKey { get; set; }
+
+    public bool Async { get; set; }
+}
+```
+
+You can set up a `MandrillClient` with the above `MandrillOptions` and getting the `MandrillService` through dependency injection.
+```csharp
+public MandrillClient(MandrillOptions options, IMandrillService mandrillService)
+{
+    _options = options ?? throw new ArgumentNullException(nameof(options), "You need to setup MandrillOptions");
+    _mandrillService = mandrillService;
+    _webhookProvider = new MandrillWebhookProvider(mandrillService, _options);
+    _jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+}
+```
+
+The Mandrill library also allows you to create template messages using the `MandrillTemplate` class as seen below.
+```csharp
+public class MandrillTemplate
+{
+    public string Name { get; set; }
+
+    public string Content { get; set; }
+}
+```
+
+```csharp
+public async Task<bool?> SendTemplateMessageAsync(MailMessage message, string templateName, List<MandrillTemplate> templates = null)
+{
+    var mandrillMessage = new MandrillMailMessage(message);
+    var messageRequest = templates != null ?
+        new SendTemplateMessageRequest(_options.ApiKey, mandrillMessage, templates, templateName, _options.Async) :
+        new SendTemplateMessageRequest(_options.ApiKey, mandrillMessage, templateName, _options.Async);
+    using (var result = await SendPostRequestAsync($"messages/send-template{_outputFormat}", messageRequest))
+    {
+        return result.IsSuccessStatusCode;
+    }
+}
+```
+
+Mandrill also has the ability to use webhooks to receive information about email events as they occur. This uses the `MandrillWebhookProvider` class.
+
+```csharp
+public MandrillWebhookProvider(IMandrillService mandrillService, MandrillOptions options)
+{
+    _mandrillService = mandrillService;
+    _options = options;
+}
+```
