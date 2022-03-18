@@ -39,7 +39,6 @@ namespace Audacia.Mail.Mandrill
             _mandrillService = mandrillService;
             _webhookProvider = new MandrillWebhookProvider(mandrillService, _options);
             _jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-            _webhookProvider = new MandrillWebhookProvider(_mandrillService, _options);
         }
 
         /// <inheritdoc />
