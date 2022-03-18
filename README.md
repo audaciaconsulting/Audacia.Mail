@@ -299,19 +299,19 @@ Mandrill is different to the other `IMailClient` implementations above as it use
 
 Due to this it has more configuration needed to be able to use it, if you are using Mandrill just for SMTP it is best to use MailKit instead as it needs less configuration to get working.
 
-Firstly the MandrillService is needed to be added via the IServiceCollection to allow for dependency injection. There is already an extension within the Mandrill library called `AddMandrillServiceCollection` 
+There is an extension within the Mandrill library called `AddMandrillClient` which will add the `MandrillClient` and the `MandrillService` to your `IServiceCollection` to allow for dependency injection.
 as seen below.
 ```csharp
-public static class MandrillServiceCollectionExtensions
+public static IServiceCollection AddMandrillClient(this IServiceCollection services, MandrillOptions options)
 {
-    public static IServiceCollection AddMandrillServiceCollection(this IServiceCollection services)
-    {
-        return services.AddHttpClient<IMandrillService, MandrillService>(client =>
+    return services
+        .AddSingleton(options)
+        .AddTransient<IMailClient, MandrillClient>()
+        .AddHttpClient<IMandrillService, MandrillService>(client =>
         {
             client.BaseAddress = new Uri("https://mandrillapp.com/api/1.0/");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }).Services;
-    }
 }
 ```
 
