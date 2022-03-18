@@ -330,17 +330,6 @@ public class MandrillOptions
 }
 ```
 
-You can set up a `MandrillClient` with the above `MandrillOptions` and getting the `MandrillService` through dependency injection.
-```csharp
-public MandrillClient(MandrillOptions options, IMandrillService mandrillService)
-{
-    _options = options ?? throw new ArgumentNullException(nameof(options), "You need to setup MandrillOptions");
-    _mandrillService = mandrillService;
-    _webhookProvider = new MandrillWebhookProvider(mandrillService, _options);
-    _jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-}
-```
-
 The Mandrill library also allows you to create template messages using the `MandrillTemplate` class as seen below.
 ```csharp
 public class MandrillTemplate
