@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<Copyright>Copyright © Audacia 2019</Copyright>
 		<PackageIconUrl>https://www.audacia.co.uk/media/pkenoobu/audacia-logo-circle-blue.png</PackageIconUrl>
-		<PackageVersion>1.0.0</PackageVersion>
+		<PackageVersion>1.1.0</PackageVersion>
 		<Description>Mailtrap implementation of the Audacia.Mail interface.</Description>
 		<CodeAnalysisRuleSet></CodeAnalysisRuleSet>
 		<TargetFramework>netstandard2.0</TargetFramework>

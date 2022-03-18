@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+		<Copyright>Copyright © Audacia 2019</Copyright>
+		<PackageIconUrl>https://www.audacia.co.uk/media/pkenoobu/audacia-logo-circle-blue.png</PackageIconUrl>
+		<PackageVersion>1.1.0</PackageVersion>
+		<Description>Mandrill implementations for the Audacia.Mail interface.</Description>
+		<CodeAnalysisRuleSet></CodeAnalysisRuleSet>
+		<TargetFramework>netstandard2.0</TargetFramework>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="MandrillHelper.cs~RF4e295c9b.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Audacia.CodeAnalysis" Version="1.1.22027.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
+    <PackageReference Include="System.Text.Json" Version="6.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Audacia.Mail\Audacia.Mail.csproj" />
+  </ItemGroup>
+
+</Project>

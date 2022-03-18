@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audacia.Mail", "Audacia.Mail\Audacia.Mail.csproj", "{824D2CC1-1C4D-42EE-8443-108297FF56B0}"
 EndProject
@@ -25,6 +25,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audacia.Mail.Log", "Audacia.Mail.Log\Audacia.Mail.Log.csproj", "{EE577F2F-0757-46BA-B2F1-0C3E0BC67370}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audacia.Mail.Noop", "Audacia.Mail.Noop\Audacia.Mail.Noop.csproj", "{428D74E7-1EB2-483C-88BE-CC5027A83E3E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audacia.Mail.Mandrill", "Audacia.Mail.Mandrill\Audacia.Mail.Mandrill.csproj", "{4C0437F4-24A6-4493-8D73-ABF065D953BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,6 +66,10 @@ Global
 		{428D74E7-1EB2-483C-88BE-CC5027A83E3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{428D74E7-1EB2-483C-88BE-CC5027A83E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{428D74E7-1EB2-483C-88BE-CC5027A83E3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C0437F4-24A6-4493-8D73-ABF065D953BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C0437F4-24A6-4493-8D73-ABF065D953BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C0437F4-24A6-4493-8D73-ABF065D953BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C0437F4-24A6-4493-8D73-ABF065D953BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
