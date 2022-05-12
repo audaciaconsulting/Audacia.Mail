@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -15,19 +16,19 @@ namespace Audacia.Mail.MailKit
     /// <seealso cref="IMailClient" />
     public class MailKitClient : IMailClient
     {
-        /// <summary>The address to be used when no sender is provided on the email.</summary>
+        /// <summary>Gets or sets the address to be used when no sender is provided on the email.</summary>
         public string DefaultSender { get; protected set; }
 
-        /// <summary>the username to authenticate with.</summary>
+        /// <summary>Gets or sets the username to authenticate with.</summary>
         public string UserName { get; protected set; }
 
-        /// <summary>The password to authenticate with.</summary>
+        /// <summary>Gets or sets the password to authenticate with.</summary>
         public string Password { get; protected set; }
 
-        /// <summary>The host server address.</summary>
+        /// <summary>Gets the host server address.</summary>
         public string Host { get; }
 
-        /// <summary>The port through which to connect to the host.</summary>
+        /// <summary>Gets the port through which to connect to the host.</summary>
         public int Port { get; }
 
         private SmtpClient _client = new SmtpClient();
@@ -46,15 +47,17 @@ namespace Audacia.Mail.MailKit
         }
 
         /// <summary>Initializes a new instance of the <see cref="MailKitClient"/>, then connects and authenticates with the SMTP server.</summary>
+        /// <param name="settings">Settings required to connect to SMTP server.</param>
+        /// <returns>A <see cref="MailKitClient"/>.</returns>
         public static MailKitClient Connect(SmtpSettings settings)
         {
             var client = new MailKitClient(settings);
-            client.Connect();
+            client.ConnectToSmtpServer();
             return client;
         }
 
-        /// <summary>Connect and authenticate with the SMTP server.</summary>
-        public void Connect()
+        /// <summary>ConnectToSmtpServer and authenticate with the SMTP server.</summary>
+        public void ConnectToSmtpServer()
         {
             if (!_client.IsConnected)
             {
@@ -69,6 +72,7 @@ namespace Audacia.Mail.MailKit
 
         /// <summary>Sends the specified message.</summary>
         /// <param name="message">The message.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="message"/> is <see langword="null"/>.</exception>
         public void Send(MailMessage message)
         {
             if (message == null) throw new ArgumentNullException(nameof(message));
@@ -96,6 +100,8 @@ namespace Audacia.Mail.MailKit
 
         /// <summary>Sends the specified message asynchronously.</summary>
         /// <param name="message">The message.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="message"/> is <see langword="null"/>.</exception>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public virtual async Task SendAsync(MailMessage message)
         {
             if (message == null) throw new ArgumentNullException(nameof(message));
@@ -151,18 +157,7 @@ namespace Audacia.Mail.MailKit
                 }
             };
 
-            foreach (var attachment in mailMessage.Attachments)
-            {
-                var part = new MimePart(attachment.ContentType)
-                {
-                    Content = new MimeContent(new MemoryStream(attachment.Bytes.ToArray())),
-                    ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
-                    ContentTransferEncoding = ContentEncoding.Base64,
-                    FileName = attachment.FileName
-                };
-
-                body.Add(part);
-            }
+            AddAttachments(body, mailMessage.Attachments);
 
             var sender = new MailboxAddress(mailMessage.Sender.Name, mailMessage.Sender.Address);
             var recipients = mailMessage.Recipients.Select(s => new MailboxAddress(s.Name, s.Address));
@@ -179,6 +174,25 @@ namespace Audacia.Mail.MailKit
             }
 
             return message;
+        }
+
+        private static void AddAttachments(Multipart body, IList<MailAttachment> attachments)
+        {
+            foreach (var attachment in attachments)
+            {
+                using (var memoryStream = new MemoryStream(attachment.Bytes.ToArray()))
+                {
+                    var part = new MimePart(attachment.ContentType)
+                    {
+                        Content = new MimeContent(memoryStream),
+                        ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+                        ContentTransferEncoding = ContentEncoding.Base64,
+                        FileName = attachment.FileName
+                    };
+
+                    body.Add(part);
+                }
+            }
         }
     }
 }

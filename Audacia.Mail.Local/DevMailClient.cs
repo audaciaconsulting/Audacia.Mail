@@ -7,11 +7,15 @@ namespace Audacia.Mail.Local
 	/// <summary>Sends mail to the local machine for testing purposes.</summary>
 	public class DevMailClient : MailKitClient
 	{
-		/// <summary>The type of local SMTP server to be used. This will automatically be installed using chocolatey and started with the application.</summary>
+		/// <summary>Gets the type of local SMTP server to be used. This will automatically be installed using chocolatey and started with the application.</summary>
 		public ServerType ServerType { get; }
 
         /// <summary>Initializes a new instance of the <see cref="DevMailClient"/> class.</summary>
-		public DevMailClient(ServerType serverType, int port = 25, string defaultSender = null)
+        /// <param name="serverType">The <see cref="ServerType"/> for the client.</param>
+        /// <param name="port">The port number.</param>
+        /// <param name="defaultSender">The default sender address.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Maintainability", "AV1553:Do not use optional parameters with default value null for strings, collections or tasks", Justification = "Getting rid of warnings here would require reordering the parameters of the method")]
+        public DevMailClient(ServerType serverType, int port = 25, string defaultSender = null)
 			: base(GetSettings(port))
 		{
 			ServerType = serverType;

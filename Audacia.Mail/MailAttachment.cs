@@ -29,7 +29,7 @@ namespace Audacia.Mail
         /// <value>The type of the content.</value>
         public string ContentType { get; set; }
 
-        /// <summary>Gets or sets the file bytes.</summary>
+        /// <summary>Gets the file bytes.</summary>
         /// <value>The bytes.</value>
         public IList<byte> Bytes { get; }
     }

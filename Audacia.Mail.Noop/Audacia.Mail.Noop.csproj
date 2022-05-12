@@ -3,10 +3,12 @@
     <PropertyGroup>
       <TargetFramework>netstandard2.0</TargetFramework>
       <PackageVersion>1.1.0</PackageVersion>
+      <GenerateDocumentationFile>True</GenerateDocumentationFile>
+      <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Audacia.CodeAnalysis" Version="1.1.22019.3">
+      <PackageReference Include="Audacia.CodeAnalysis" Version="1.3.0">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>

@@ -1,4 +1,4 @@
-# NOTE: Requires **VS2019 16.3** or later
+# NOTE: Requires **VS2022**
 
 # Default Rules
 # Description: CodeAnalysis.ruleset
@@ -8,6 +8,8 @@ root = true
 # Code files
 [*.cs]
 
+# New files created with file-scoped namespaces
+csharp_style_namespace_declarations = file_scoped
 
 # Private fields should be prefixed with an underscore.
 dotnet_diagnostic.ACL1000.severity = warning
@@ -35,6 +37,12 @@ dotnet_diagnostic.ACL1006.severity = warning
 # ACL1007: ThenByDescending follows OrderBy or OrderByDescending.
 dotnet_diagnostic.ACL1007.severity = suggestion
 
+# Controller action should have at least one ProducesResponseType attribute
+dotnet_diagnostic.ACL1008.severity = none
+
+# Method overload should call another overload
+dotnet_diagnostic.ACL1009.severity = none
+
 # A class or interface should have a single purpose
 dotnet_diagnostic.AV1000.severity = warning
 
@@ -48,7 +56,7 @@ dotnet_diagnostic.AV1010.severity = warning
 dotnet_diagnostic.AV1115.severity = warning
 
 # Return type in method signature should be a collection interface instead of a concrete type
-dotnet_diagnostic.AV1130.severity = warning
+dotnet_diagnostic.AV1130.severity = suggestion
 
 # Properties, arguments and return values representing strings, collections or tasks should never be `null`
 dotnet_diagnostic.AV1135.severity = warning
@@ -101,6 +109,12 @@ dotnet_diagnostic.AV1537.severity = none
 # Call the more overloaded method from other overloads
 dotnet_diagnostic.AV1551.severity = warning
 
+# Only use optional parameters to replace overloads
+dotnet_diagnostic.AV1553.severity = warning
+
+# Do not use optional parameters in interface methods or their concrete implementations
+dotnet_diagnostic.AV1554.severity = warning
+
 # Avoid using named arguments
 dotnet_diagnostic.AV1555.severity = none
 
@@ -116,6 +130,9 @@ dotnet_diagnostic.AV1564.severity = warning
 # Don't use parameters as temporary variables
 dotnet_diagnostic.AV1568.severity = suggestion
 
+# Write code that is easy to debug
+dotnet_diagnostic.AV1580.severity = suggestion
+
 # Don't include numbers in variables, parameters and type members
 dotnet_diagnostic.AV1704.severity = warning
 
@@ -123,7 +140,7 @@ dotnet_diagnostic.AV1704.severity = warning
 dotnet_diagnostic.AV1706.severity = none
 
 # Name types using nouns, noun phrases or adjective phrases
-dotnet_diagnostic.AV1708.severity = warning
+dotnet_diagnostic.AV1708.severity = suggestion
 
 # Don't repeat the name of a class or enumeration in its members
 dotnet_diagnostic.AV1710.severity = warning
@@ -153,7 +170,7 @@ dotnet_diagnostic.AV1755.severity = none
 dotnet_diagnostic.AV2202.severity = warning
 
 # Build with the highest warning level
-dotnet_diagnostic.AV2210.severity = suggestion
+dotnet_diagnostic.AV2210.severity = warning
 
 # Avoid LINQ query syntax for simple expressions
 dotnet_diagnostic.AV2220.severity = none
@@ -390,7 +407,7 @@ dotnet_diagnostic.CA1806.severity = warning
 dotnet_diagnostic.CA1810.severity = warning
 
 # [PERFORMANCE] Avoid uninstantiated internal classes
-dotnet_diagnostic.CA1812.severity = warning
+dotnet_diagnostic.CA1812.severity = suggestion
 
 # [PERFORMANCE] Avoid unsealed attributes
 dotnet_diagnostic.CA1813.severity = warning
@@ -809,6 +826,15 @@ dotnet_diagnostic.DOC207.severity = warning
 # The documentation contains a `<see href="..."/>` element with an unrecognized URI.
 dotnet_diagnostic.DOC209.severity = warning
 
+# Use simple using statement
+dotnet_diagnostic.IDE0063.severity = warning
+
+# Use switch expression
+dotnet_diagnostic.IDE0066.severity = warning
+
+# Use file-scoped namespaces
+dotnet_diagnostic.IDE0161.severity = warning
+
 # Dispose created.
 dotnet_diagnostic.IDISP001.severity = warning
 
@@ -926,8 +952,8 @@ dotnet_diagnostic.RCS1016.severity = suggestion
 # [STYLE] Avoid multiline expression body
 dotnet_diagnostic.RCS1017.severity = none
 
-# [READABILITY] Add default access modifier
-dotnet_diagnostic.RCS1018.severity = warning
+# [READABILITY] Add default access modifier *** Suppressed as covered by SA1400 ***
+dotnet_diagnostic.RCS1018.severity = none
 
 # [READABILITY] Order modifiers *** Suppressed as covered by SA1206 ***
 dotnet_diagnostic.RCS1019.severity = none
@@ -977,8 +1003,8 @@ dotnet_diagnostic.RCS1034.severity = warning
 # [REDUNDANCY] Remove redundant comma in initializer
 dotnet_diagnostic.RCS1035.severity = warning
 
-# [REDUNDANCY] Remove redundant empty line
-dotnet_diagnostic.RCS1036.severity = warning
+# [REDUNDANCY] Remove redundant empty line *** Suppressed as covered by SA1507 ***
+dotnet_diagnostic.RCS1036.severity = none
 
 # [REDUNDANCY] Remove trailing white-space
 dotnet_diagnostic.RCS1037.severity = none
@@ -1298,8 +1324,8 @@ dotnet_diagnostic.RCS1172.severity = warning
 # [SIMPLIFICATION] Use coalesce expression instead of if
 dotnet_diagnostic.RCS1173.severity = warning
 
-# [REDUNDANCY] Remove redundant async/await
-dotnet_diagnostic.RCS1174.severity = warning
+# [REDUNDANCY] Remove redundant async/await *** Suppressed as not considered best practice (see https://blog.stephencleary.com/2016/12/eliding-async-await.html) ***
+dotnet_diagnostic.RCS1174.severity = none
 
 # [REDUNDANCY] Unused this parameter
 dotnet_diagnostic.RCS1175.severity = suggestion

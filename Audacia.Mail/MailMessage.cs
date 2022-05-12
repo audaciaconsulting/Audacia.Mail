@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using static Audacia.Mail.MailMessageExtensions;
 
 namespace Audacia.Mail
 {
@@ -11,8 +10,11 @@ namespace Audacia.Mail
         private MailAddress _sender = new MailAddress();
 
         /// <summary>Initializes a new instance of the <see cref="MailMessage"/> class.</summary>
+        /// <param name="recipients">An array of email addresses specifying the recipients of the message.</param>
         public MailMessage(params string[] recipients)
         {
+            if (recipients == null) throw new ArgumentNullException(nameof(recipients));
+
             foreach (var recipient in recipients)
             {
                 Recipients.Add(new MailAddress(recipient, recipient));
@@ -22,7 +24,8 @@ namespace Audacia.Mail
         /// <summary>Gets or sets the message subject.</summary>
         public string Subject { get; set; }
 
-        /// <summary>The format for the text in this message.</summary>
+        /// <summary>Gets or sets the format for the text in this message.</summary>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
         public MailFormat Format
         {
             get { return _format; }
@@ -34,7 +37,8 @@ namespace Audacia.Mail
             }
         }
 
-        /// <summary>Gets the sender addresses.</summary>
+        /// <summary>Gets or sets the sender addresses.</summary>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
         public MailAddress Sender
         {
             get { return _sender; }
@@ -42,7 +46,7 @@ namespace Audacia.Mail
             set
             {
                 if (value == null) throw new ArgumentNullException(nameof(value));
-                if (value.Address == null) throw new ArgumentNullException(nameof(value.Address));
+                if (value.Address == null) throw new ArgumentNullException(nameof(value));
                 _sender = new MailAddress(value.Name, value.Address.Trim());
             }
         }
@@ -67,6 +71,7 @@ namespace Audacia.Mail
         /// <summary>
         /// Creates an empty mail message.
         /// </summary>
+        /// <returns>Created <see cref="MailMessage"/>.</returns>
         public static MailMessage Create() => new MailMessage();
     }
 }

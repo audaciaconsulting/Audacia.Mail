@@ -9,6 +9,7 @@ namespace Audacia.Mail
     {
         /// <summary>Sends the specified message asynchronously.</summary>
         /// <param name="message">The message.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         Task SendAsync(MailMessage message);
     }
 }

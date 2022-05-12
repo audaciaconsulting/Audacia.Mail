@@ -10,7 +10,8 @@ namespace Audacia.Mail
         /// <param name="address">The address.</param>
         public MailAddress(string address)
         {
-            Name = Address = address;
+            Name = address;
+            Address = address;
         }
 
         /// <summary>Initializes a new instance of the <see cref="MailAddress"/> class.</summary>

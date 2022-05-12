@@ -9,12 +9,15 @@ namespace Audacia.Mail.SendGrid
 	public class SendGridClient : IMailClient
 	{
         /// <summary>Initializes a new instance of the <see cref="SendGridClient"/> class.</summary>
+        /// <param name="apiKey">The api key for making requests to SendGrid.</param>
         public SendGridClient(string apiKey)
 		{
 			_client = new global::SendGrid.SendGridClient(apiKey);
 		}
 
 		/// <summary>Initializes a new instance of the <see cref="SendGridClient"/> class.</summary>
+		/// <param name="apiKey">The api key for making requests to SendGrid.</param>
+		/// <param name="defaultSender">The default sender address.</param>
         public SendGridClient(string apiKey, string defaultSender)
 			: this(apiKey)
 		{

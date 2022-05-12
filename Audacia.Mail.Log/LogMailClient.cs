@@ -12,6 +12,10 @@ namespace Audacia.Mail.Log
     {
         private readonly Action<string> _loggingAction;
 
+        /// <summary>
+        /// Method that creates and returns a client for console logging.
+        /// </summary>
+        /// <returns>A <see cref="IMailClient"/> of type <see cref="ConsoleLogMailClient"/>.</returns>
         public static IMailClient Console()
         {
             return new ConsoleLogMailClient();
@@ -34,15 +38,18 @@ namespace Audacia.Mail.Log
         /// </summary>
         /// <param name="message">The email to log.</param>
         /// <returns>A completed Task.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="message"/> is <see langword="null"/>.</exception>
         public Task SendAsync(MailMessage message)
         {
+            if (message == null) throw new ArgumentNullException(nameof(message));
+
             var logMessageBuilder = new StringBuilder();
 
             logMessageBuilder.AppendLine("Sending email");
-            logMessageBuilder.AppendLine($"Subject: {message.Subject}");
-            logMessageBuilder.AppendLine($"Sender: {message.Sender.Address}");
-            logMessageBuilder.AppendLine($"Recipients: {string.Join(",", message.Recipients.Select(r => r.Address))}");
-            logMessageBuilder.AppendLine($"Body: {message.Body}");
+            logMessageBuilder.AppendLine("Subject: ").Append(message.Subject);
+            logMessageBuilder.AppendLine("Sender: ").Append(message.Sender.Address);
+            logMessageBuilder.AppendLine("Recipients: ").Append(string.Join(",", message.Recipients.Select(r => r.Address)));
+            logMessageBuilder.AppendLine("Body: ").Append(message.Body);
 
             var logMessage = logMessageBuilder.ToString();
 
@@ -56,7 +63,18 @@ namespace Audacia.Mail.Log
         /// </summary>
         public void Dispose()
         {
+            Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Releases the unmanaged resources used by the <see cref="System.Net.Http.HttpMessageInvoker" /> and optionally disposes of the managed resources.
+        /// </summary>
+        /// <param name="disposing">
+        /// <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to releases only unmanaged resources.
+        /// </param>
+        protected virtual void Dispose(bool disposing)
+        {
         }
     }
 }
