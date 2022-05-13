@@ -3,7 +3,10 @@ using System.Collections.Generic;
 
 namespace Audacia.Mail.Mandrill.InternalModels.WebhookJsonDeserialisation
 {
-    internal class RetrievedWebhookItem
+    /// <summary>
+    /// Class representing a Mandrill webhook.
+    /// </summary>
+    public class RetrievedWebhookItem
     {
         /// <summary>
         /// Gets or sets the id.
@@ -13,7 +16,7 @@ namespace Audacia.Mail.Mandrill.InternalModels.WebhookJsonDeserialisation
         /// <summary>
         /// Gets or sets the url.
         /// </summary>
-        public string Url { get; set; }
+        public Uri Url { get; set; }
 
         /// <summary>
         /// Gets or sets the description.

@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Audacia.Mail.Mandrill.InternalModels;
 using Audacia.Mail.Mandrill.Services;
-using Audacia.Mandrill.Models;
 
 namespace Audacia.Mail.Mandrill
 {
@@ -46,7 +44,7 @@ namespace Audacia.Mail.Mandrill
         public async Task SendAsync(MailMessage message)
         {
             var mandrillMessage = new MandrillMailMessage(message);
-            var messageRequest = new SendMessageRequest(_options.ApiKey, mandrillMessage, _options.Async);
+            var messageRequest = new SendMessageRequest(_options.ApiKey, mandrillMessage, _options.Async ? AsyncMode.Enabled : AsyncMode.Disabled);
             await SendPostRequestAsync("messages/send", messageRequest).ConfigureAwait(false);
         }
 
@@ -75,9 +73,10 @@ namespace Audacia.Mail.Mandrill
         public virtual async Task<bool?> SendTemplateMessageAsync(MailMessage message, string templateName, List<MandrillTemplate> templates)
         {
             var mandrillMessage = new MandrillMailMessage(message);
+            var sendMessageRequest = new SendMessageRequest(_options.ApiKey, mandrillMessage, _options.Async ? AsyncMode.Enabled : AsyncMode.Disabled);
             var messageRequest = templates != null ?
-                new SendTemplateMessageRequest(_options.ApiKey, mandrillMessage, templates, templateName, _options.Async) :
-                new SendTemplateMessageRequest(_options.ApiKey, mandrillMessage, templateName, _options.Async);
+                new SendTemplateMessageRequest(sendMessageRequest, templates, templateName) :
+                new SendTemplateMessageRequest(sendMessageRequest, templateName);
             using (var result = await SendPostRequestAsync($"messages/send-template{_outputFormat}", messageRequest).ConfigureAwait(false))
             {
                 return result.IsSuccessStatusCode;

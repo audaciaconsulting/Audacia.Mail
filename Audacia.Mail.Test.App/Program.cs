@@ -8,7 +8,7 @@ namespace Audacia.Mail.Test.App
 {
     internal static class Program
     {
-        [SuppressMessage("ReSharper", "CA1308", Justification = "Strings are not being normalised.")]
+        [SuppressMessage("Globalization", "CA1308:Normalize strings to uppercase", Justification = "Email addresses should be lower case.")]
         private static async Task Main()
         {
             var localMailer = new LogMailClient((message) =>
@@ -19,9 +19,8 @@ namespace Audacia.Mail.Test.App
             using (localMailer)
             {
                 var random = new System.Random();
-                var iteration = 1;
 
-                while (iteration <= 10)
+                for (var iteration = 1; iteration <= 10; iteration++)
                 {
                     var forenames = new[]
                     {
@@ -60,14 +59,19 @@ namespace Audacia.Mail.Test.App
                                + $"<div><b>{random.Sentence()}</b></div>"
                     };
 
-                    await localMailer.SendAsync(message).ConfigureAwait(false);
-                    Console.WriteLine($"Sent email #{iteration}");
-                    await Task.Delay(1000).ConfigureAwait(false);
-                    iteration++;
+                    await SendMailAsync(localMailer, message, iteration);
                 }
 
                 await Task.Delay(int.MaxValue).ConfigureAwait(false);
             }
+        }
+
+        private static async Task SendMailAsync(LogMailClient localMailer, MailMessage message, int iteration)
+        {
+            await localMailer.SendAsync(message).ConfigureAwait(false);
+            Console.WriteLine($"Sent email #{iteration}");
+            await Task.Delay(1000).ConfigureAwait(false);
+            iteration++;
         }
     }
 }

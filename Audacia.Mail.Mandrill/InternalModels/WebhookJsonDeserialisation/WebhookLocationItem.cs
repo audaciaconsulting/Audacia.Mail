@@ -1,35 +1,35 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Audacia.Mandrill.Models.WebhookJsonDeserialisation
+namespace Audacia.Mail.Mandrill.InternalModels.WebhookJsonDeserialisation
 {
     /// <summary>Location details for the webhook trigger.</summary>
     public class WebhookLocationItem
     {
-        /// <summary>Abbreviated name for the country.</summary>
+        /// <summary>Gets or sets the abbreviated name for the country.</summary>
         [JsonPropertyName("Country_short")]
         public string CountryShort { get; set; }
 
-        /// <summary>Full name for the country.</summary>
+        /// <summary>Gets or sets the full name for the country.</summary>
         [JsonPropertyName("Country_long")]
         public string CountryLong { get; set; }
 
-        /// <summary>Name for the region.</summary>
+        /// <summary>Gets or sets the name for the region.</summary>
         public string Region { get; set; }
 
-        /// <summary>Name for the city.</summary>
+        /// <summary>Gets or sets the name for the city.</summary>
         public string City { get; set; }
 
-        /// <summary>Postal code for the event.</summary>
+        /// <summary>Gets or sets the postal code for the event.</summary>
         [JsonPropertyName("Postal_Code")]
         public string PostalCode { get; set; }
 
-        /// <summary>Timezone for the event.</summary>
+        /// <summary>Gets or sets the timezone for the event.</summary>
         public string Timezone { get; set; }
 
-        /// <summary>Latitude for the event.</summary>
+        /// <summary>Gets or sets the latitude for the event.</summary>
         public float Latitude { get; set; }
 
-        /// <summary>Longitude for the event.</summary>
+        /// <summary>Gets or sets the longitude for the event.</summary>
         public float Longitude { get; set; }
     }
 }

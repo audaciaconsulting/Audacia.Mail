@@ -5,10 +5,19 @@ using System.Text.Json.Serialization;
 
 namespace Audacia.Mail.Mandrill
 {
+    /// <summary>
+    /// Class for creating Mandrill mail messages.
+    /// </summary>
     public class MandrillMailMessage
     {
+        /// <summary>
+        /// Constructor for <see cref="MandrillMailMessage"/>.
+        /// </summary>
+        /// <param name="mailMessage"><see cref="MailMessage"/> for constructing <see cref="MandrillMailMessage"/>.</param>
         public MandrillMailMessage(MailMessage mailMessage)
         {
+            if (mailMessage == null) throw new ArgumentNullException(nameof(mailMessage));
+
             To = mailMessage.Recipients.Select(address => new MandrillMailAddress(address.Name, address.Address, "to"))
             .Concat(mailMessage.Cc.Select(address => new MandrillMailAddress(address.Name, address.Address, "cc")))
             .Concat(mailMessage.Bcc.Select(address => new MandrillMailAddress(address.Name, address.Address, "bcc")))

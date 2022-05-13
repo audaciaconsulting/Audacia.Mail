@@ -10,12 +10,11 @@ namespace Audacia.Mail.Local
 		/// <summary>Gets the type of local SMTP server to be used. This will automatically be installed using chocolatey and started with the application.</summary>
 		public ServerType ServerType { get; }
 
-        /// <summary>Initializes a new instance of the <see cref="DevMailClient"/> class.</summary>
-        /// <param name="serverType">The <see cref="ServerType"/> for the client.</param>
-        /// <param name="port">The port number.</param>
-        /// <param name="defaultSender">The default sender address.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Maintainability", "AV1553:Do not use optional parameters with default value null for strings, collections or tasks", Justification = "Getting rid of warnings here would require reordering the parameters of the method")]
-        public DevMailClient(ServerType serverType, int port = 25, string defaultSender = null)
+		/// <summary>Initializes a new instance of the <see cref="DevMailClient"/> class.</summary>
+		/// <param name="serverType">The <see cref="ServerType"/> for the client.</param>
+		/// <param name="defaultSender">The default sender address.</param>
+		/// <param name="port">The port number.</param>
+		public DevMailClient(ServerType serverType, string defaultSender, int port = 25)
 			: base(GetSettings(port))
 		{
 			ServerType = serverType;
@@ -27,6 +26,21 @@ namespace Audacia.Mail.Local
 				Password = Guid.NewGuid().ToString();
 			}
 		}
+
+        /// <summary>Initializes a new instance of the <see cref="DevMailClient"/> class.</summary>
+        /// <param name="serverType">The <see cref="ServerType"/> for the client.</param>
+        /// <param name="port">The port number.</param>
+        public DevMailClient(ServerType serverType, int port = 25)
+            : base(GetSettings(port))
+        {
+            ServerType = serverType;
+
+            if (serverType == ServerType.Smtp4dev)
+            {
+                UserName = Guid.NewGuid().ToString();
+                Password = Guid.NewGuid().ToString();
+            }
+        }
 
 		private static SmtpSettings GetSettings(int port)
 		{

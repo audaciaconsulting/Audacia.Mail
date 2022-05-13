@@ -1,14 +1,17 @@
-namespace Audacia.Mandrill.Models
+namespace Audacia.Mail.Mandrill.InternalModels
 {
+    /// <summary>
+    /// Class representing a Mandrill template.
+    /// </summary>
     public class MandrillTemplate
     {
         /// <summary>
-        /// Name of the mc:edit editable region to inject to
+        /// Gets or sets the name of the mc:edit editable region to inject to.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// The content to inject
+        /// Gets or sets the content to inject.
         /// </summary>
         public string Content { get; set; }
     }

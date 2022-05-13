@@ -6,7 +6,6 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Audacia.Mail.Mandrill.InternalModels.WebhookJsonDeserialisation;
 using Audacia.Mail.Mandrill.Services;
-using Audacia.Mandrill.Models.WebhookJsonDeserialisation;
 
 namespace Audacia.Mail.Mandrill
 {
