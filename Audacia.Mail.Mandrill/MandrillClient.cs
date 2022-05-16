@@ -75,8 +75,8 @@ namespace Audacia.Mail.Mandrill
             var mandrillMessage = new MandrillMailMessage(message);
             var sendMessageRequest = new SendMessageRequest(_options.ApiKey, mandrillMessage, _options.Async ? AsyncMode.Enabled : AsyncMode.Disabled);
             var messageRequest = templates != null ?
-                new SendTemplateMessageRequest(sendMessageRequest, templates, templateName) :
-                new SendTemplateMessageRequest(sendMessageRequest, templateName);
+                new SendTemplateMessageRequest(sendMessageRequest.Key, sendMessageRequest.Message, templates, templateName, sendMessageRequest.SendAsync) :
+                new SendTemplateMessageRequest(sendMessageRequest.Key, sendMessageRequest.Message, templateName, sendMessageRequest.SendAsync);
             using (var result = await SendPostRequestAsync($"messages/send-template{_outputFormat}", messageRequest).ConfigureAwait(false))
             {
                 return result.IsSuccessStatusCode;

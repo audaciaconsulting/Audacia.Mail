@@ -11,29 +11,34 @@ namespace Audacia.Mail.Mandrill.InternalModels
         /// <summary>
         /// Constructor for <see cref="SendTemplateMessageRequest"/>.
         /// </summary>
-        /// <param name="sendMessageRequest">The <see cref="SendMessageRequest"/> detailing message properties.</param>
+        /// <param name="apiKey">The api key for Mandrill.</param>
+        /// <param name="message">The <see cref="MandrillMailMessage"/> detailing message properties.</param>
         /// <param name="templates">A collection of <see cref="MandrillTemplate"/>s specifying content for editable sections of the template.</param>
         /// <param name="templateName">The template in Mandrill to use.</param>
-        public SendTemplateMessageRequest(SendMessageRequest sendMessageRequest, List<MandrillTemplate> templates, string templateName) : base(sendMessageRequest.Key, sendMessageRequest.Message, sendMessageRequest.SendAsync)
+        /// <param name="asyncMode">Indicates whether to send the message asynchronously or not.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Maintainability", "ACL1003:Signature contains too many parameters", Justification = "Would be a breaking change to package to change parameters.")]
+        public SendTemplateMessageRequest(string apiKey, MandrillMailMessage message, List<MandrillTemplate> templates, string templateName, AsyncMode asyncMode) : base(apiKey, message, asyncMode)
         {
-            Message = sendMessageRequest.Message;
+            Message = message;
             TemplateContent = templates;
             TemplateName = templateName;
-            SendAsync = sendMessageRequest.SendAsync;
+            SendAsync = asyncMode;
             SendAt = DateTime.Now.AddMinutes(-1);
         }
 
         /// <summary>
         /// Constructor for <see cref="SendTemplateMessageRequest"/>.
         /// </summary>
-        /// <param name="sendMessageRequest">The <see cref="SendMessageRequest"/> detailing message properties.</param>
+        /// <param name="apiKey">The api key for Mandrill.</param>
+        /// <param name="message">The <see cref="MandrillMailMessage"/> detailing message properties.</param>
         /// <param name="templateName">The template in Mandrill to use.</param>
-        public SendTemplateMessageRequest(SendMessageRequest sendMessageRequest, string templateName) : base(sendMessageRequest.Key, sendMessageRequest.Message, sendMessageRequest.SendAsync)
+        /// <param name="asyncMode">Indicates whether to send the message asynchronously or not.</param>
+        public SendTemplateMessageRequest(string apiKey, MandrillMailMessage message, string templateName, AsyncMode asyncMode) : base(apiKey, message, asyncMode)
         {
-            Message = sendMessageRequest.Message;
+            Message = message;
             TemplateContent = new List<MandrillTemplate>();
             TemplateName = templateName;
-            SendAsync = sendMessageRequest.SendAsync;
+            SendAsync = asyncMode;
             SendAt = DateTime.Now.AddMinutes(-1);
         }
 

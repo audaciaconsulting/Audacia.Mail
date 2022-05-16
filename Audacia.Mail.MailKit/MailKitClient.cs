@@ -52,12 +52,13 @@ namespace Audacia.Mail.MailKit
         public static MailKitClient Connect(SmtpSettings settings)
         {
             var client = new MailKitClient(settings);
-            client.ConnectToSmtpServer();
+            client.Connect();
             return client;
         }
 
         /// <summary>ConnectToSmtpServer and authenticate with the SMTP server.</summary>
-        public void ConnectToSmtpServer()
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Maintainability", "AV1551:Method overload should call another overload", Justification = "These are not overloads but different methods.")]
+        public void Connect()
         {
             if (!_client.IsConnected)
             {
