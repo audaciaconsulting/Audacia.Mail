@@ -5,19 +5,19 @@ namespace Audacia.Mail
     /// </summary>
     public class SmtpSettings
     {
-        /// <summary>the username to authenticate with.</summary>
+        /// <summary>Gets or sets the username to authenticate with.</summary>
         public string UserName { get; set; }
 
-        /// <summary>The password to authenticate with.</summary>
+        /// <summary>Gets or sets the password to authenticate with.</summary>
         public string Password { get; set; }
 
-        /// <summary>The host server address.</summary>
+        /// <summary>Gets or sets the host server address.</summary>
         public string Host { get; set; }
 
-        /// <summary>The port through which to connect to the host.</summary>
+        /// <summary>Gets or sets the port through which to connect to the host.</summary>
         public int Port { get; set; }
 
-        /// <summary>The address to be used when no sender is provided on the email.</summary>
+        /// <summary>Gets or sets the address to be used when no sender is provided on the email.</summary>
         public string DefaultSender { get; set; }
     }
 }

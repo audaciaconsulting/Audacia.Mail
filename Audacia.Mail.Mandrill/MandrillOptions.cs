@@ -1,5 +1,8 @@
 ﻿namespace Audacia.Mail.Mandrill
 {
+    /// <summary>
+    /// A configuration class for <see cref="MandrillWebhookProvider"/>.
+    /// </summary>
     public class MandrillOptions
     {
         /// <summary>

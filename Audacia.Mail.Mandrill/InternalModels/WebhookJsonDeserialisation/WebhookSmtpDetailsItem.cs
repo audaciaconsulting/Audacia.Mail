@@ -1,27 +1,30 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Audacia.Mandrill.Models.WebhookJsonDeserialisation
+namespace Audacia.Mail.Mandrill.InternalModels.WebhookJsonDeserialisation
 {
+    /// <summary>
+    /// Class modelling an SMTP event.
+    /// </summary>
     public class WebhookSmtpDetailsItem
     {
-        /// <summary>The UNIX timestamp of the event.</summary>
+        /// <summary>Gets or sets the UNIX timestamp of the event.</summary>
         public long Ts { get; set; }
 
-        /// <summary>The type of SMTP event</summary>
+        /// <summary>Gets or sets the type of SMTP event.</summary>
         public string Type { get; set; }
 
-        /// <summary>The SMTP diagnostic or response event.</summary>
+        /// <summary>Gets or sets the SMTP diagnostic or response event.</summary>
         public string Diag { get; set; }
 
-        /// <summary>The remote IP address of the server Mandrill was connected to.</summary>
+        /// <summary>Gets or sets the remote IP address of the server Mandrill was connected to.</summary>
         [JsonPropertyName("Destination_ip")]
         public string DestinationIp { get; set; }
 
-        /// <summary>The Mandrill IP address that was attempting to send the message.</summary>
+        /// <summary>Gets or sets the Mandrill IP address that was attempting to send the message.</summary>
         [JsonPropertyName("Source_ip")]
         public string SourceIp { get; set; }
 
-        /// <summary>The size of the message being relayed.</summary>
+        /// <summary>Gets or sets the size of the message being relayed.</summary>
         public string Size { get; set; }
     }
 }
