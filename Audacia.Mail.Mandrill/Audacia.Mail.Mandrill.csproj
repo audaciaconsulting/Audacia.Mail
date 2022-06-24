@@ -2,16 +2,23 @@
 
   <PropertyGroup>
 		<Copyright>Copyright © Audacia 2019</Copyright>
-		<PackageIconUrl>https://www.audacia.co.uk/media/pkenoobu/audacia-logo-circle-blue.png</PackageIconUrl>
 		<PackageVersion>1.1.0</PackageVersion>
 		<Description>Mandrill implementations for the Audacia.Mail interface.</Description>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<TargetFramework>netstandard2.0</TargetFramework>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <PackageIcon>audacia-logo-circle-blue.png</PackageIcon>
 	</PropertyGroup>
 
   <ItemGroup>
     <None Remove="MandrillHelper.cs~RF4e295c9b.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\audacia-logo-circle-blue.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
