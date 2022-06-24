@@ -2,12 +2,12 @@
 
 	<PropertyGroup>
 		<Copyright>Copyright © Audacia 2019</Copyright>
-		<PackageIconUrl>https://www.audacia.co.uk/media/pkenoobu/audacia-logo-circle-blue.png</PackageIconUrl>
 		<PackageVersion>1.1.0</PackageVersion>
 		<Description>Mailkit implementations for the Audacia.Mail interface.</Description>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <PackageIcon>audacia-logo-circle-blue.png</PackageIcon>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -18,6 +18,13 @@
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
 		<DocumentationFile>bin\Debug\Audacia.Mail.MailKit.xml</DocumentationFile>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\audacia-logo-circle-blue.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Audacia.Mail\Audacia.Mail.csproj" />

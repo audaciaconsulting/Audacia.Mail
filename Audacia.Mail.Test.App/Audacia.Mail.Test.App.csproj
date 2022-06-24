@@ -4,7 +4,6 @@
 		<OutputType>Exe</OutputType>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<Copyright>Copyright © Audacia 2019</Copyright>
-		<PackageIconUrl>https://www.audacia.co.uk/media/pkenoobu/audacia-logo-circle-blue.png</PackageIconUrl>
 		<PackageVersion>1.1.0</PackageVersion>
 		<IsPackable>false</IsPackable>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
