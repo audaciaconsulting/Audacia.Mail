@@ -1,16 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <Copyright>Copyright © Audacia 2019</Copyright>
+        <TargetFramework>netstandard2.0</TargetFramework>
         <PackageVersion>1.2.0</PackageVersion>
         <Authors>Audacia</Authors>
         <Description>Standardized interfaces for sending e-mail.</Description>
+        <Copyright>Copyright © Audacia 2019</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <TargetFramework>netstandard2.0</TargetFramework>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
         <PackageIcon>package-icon.png</PackageIcon>
+        <Nullable>enabled</Nullable>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -30,7 +31,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Audacia.CodeAnalysis" Version="1.3.0">
+        <PackageReference Include="Audacia.CodeAnalysis" Version="1.5.1">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
