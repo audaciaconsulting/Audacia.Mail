@@ -55,7 +55,7 @@ namespace Audacia.Mail.Test.App
                             }
                         },
                         Subject = $"Test {iteration}: {random.Word()} {random.Word()}",
-                        Body = "<img src=\"https://www.audacia.co.uk/media/pkenoobu/audacia-logo-circle-blue.png\">"
+                        Body = "<img src=\"https://www.audacia.co.uk/media/pkenoobu/package-icon.png\">"
                                + $"<div><b>{random.Sentence()}</b></div>"
                     };
 

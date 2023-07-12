@@ -204,7 +204,7 @@ private static SmtpSettings GetSettings(int port)
 ### `Audacia.Mail.MailKit`
 This library uses standard SMTP protocol to send mails, implemented with MailKit. This should be used if you want to use a standard SMTP client.
 
-MailKit uses the `Audacia.Mail` `SmtpSettings` class to set up the various properties for sending an email. This `SmtpSettings` can be configured below and using the `appsetting.json` like in the section [Configuring The Email Library](#configuring-the-email-library). 
+MailKit uses the `Audacia.Mail` `SmtpSettings` class to set up the various properties for sending an email. This `SmtpSettings` can be configured below and using the `appsetting.json` like in the section [Configuring The Email Library](#configuring-the-email-library).
 ```csharp
 public class SmtpSettings
 {
@@ -315,8 +315,8 @@ public static IServiceCollection AddMandrillClient(this IServiceCollection servi
 }
 ```
 
-Mandrill uses `MandrillOptions` instead of the `SmtpSettings` to set up various properties for sending a Mandrill API `Post` request. Similarly to the `SmtpSettings` these can be configured using the 
-`appsetting.json` like in the section [Configuring The Email Library](#configuring-the-email-library). 
+Mandrill uses `MandrillOptions` instead of the `SmtpSettings` to set up various properties for sending a Mandrill API `Post` request. Similarly to the `SmtpSettings` these can be configured using the
+`appsetting.json` like in the section [Configuring The Email Library](#configuring-the-email-library).
 ```csharp
 public class MandrillOptions
 {
@@ -363,3 +363,6 @@ public MandrillWebhookProvider(IMandrillService mandrillService, MandrillOptions
     _options = options;
 }
 ```
+
+# Contributing
+We welcome contributions! Please feel free to check our [Contribution Guidlines](https://github.com/audaciaconsulting/.github/blob/main/CONTRIBUTING.md) for feature requests, issue reporting and guidelines.
