@@ -13,21 +13,21 @@ namespace Audacia.Mail.Mandrill.InternalModels.WebhookJsonDeserialisation
         /// <summary>
         /// Gets or sets the IP address where the open occurred.
         /// </summary>
-        public string Ip { get; set; }
+        public string Ip { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets the approximated geolocation of the IP where the open occurred.
         /// </summary>
-        public string Location { get; set; }
+        public string Location { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets the operating system and browser that the link was opened in.
         /// </summary>
-        public string Ua { get; set; }
+        public string Ua { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets the URL of the sent link.
         /// </summary>
-        public Uri Url { get; set; }
+        public Uri Url { get; set; } = default!;
     }
 }

@@ -15,11 +15,11 @@ namespace Audacia.Mail.Local
         /// <param name="port">The port number.</param>
         /// <param name="defaultSender">The default sender address.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Maintainability", "AV1553:Do not use optional parameters with default value null for strings, collections or tasks", Justification = "Creating another overload with no code analysis warnings/errors would require reordering the params which is a breaking change.")]
-        public DevMailClient(ServerType serverType, int port = 25, string defaultSender = null)
+        public DevMailClient(ServerType serverType, int port = 25, string? defaultSender = null)
             : base(GetSettings(port))
 		{
 			ServerType = serverType;
-			DefaultSender = defaultSender;
+			DefaultSender = defaultSender ?? string.Empty;
 
 			if (serverType == ServerType.Smtp4dev)
 			{

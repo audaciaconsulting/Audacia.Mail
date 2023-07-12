@@ -23,14 +23,14 @@ namespace Audacia.Mail
 
         /// <summary>Gets or sets the name of the attached file.</summary>
         /// <value>The name of the file.</value>
-        public string FileName { get; set; }
+        public string FileName { get; set; } = default!;
 
         /// <summary>Gets or sets the MIME content type of the file.</summary>
         /// <value>The type of the content.</value>
-        public string ContentType { get; set; }
+        public string ContentType { get; set; } = default!;
 
         /// <summary>Gets the file bytes.</summary>
         /// <value>The bytes.</value>
-        public IList<byte> Bytes { get; }
+        public IList<byte> Bytes { get; } = new List<byte>();
     }
 }

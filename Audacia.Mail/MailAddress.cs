@@ -25,10 +25,10 @@ namespace Audacia.Mail
 
         /// <summary>Gets or sets the name.</summary>
         /// <value>The name.</value>
-        public string Name { get; set; }
+        public string Name { get; set; } = default!;
 
         /// <summary>Gets or sets the address.</summary>
         /// <value>The address.</value>
-        public string Address { get; set; }
+        public string Address { get; set; } = default!;
     }
 }

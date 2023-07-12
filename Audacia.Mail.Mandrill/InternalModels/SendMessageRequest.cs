@@ -10,7 +10,7 @@ namespace Audacia.Mail.Mandrill.InternalModels
         /// <summary>
         /// Gets or sets the Api Key.
         /// </summary>
-        public string Key { get; set; }
+        public string Key { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets the information to send.
@@ -28,7 +28,7 @@ namespace Audacia.Mail.Mandrill.InternalModels
         /// If you do not have any dedicated IPs, this parameter has no effect.
         /// If you specify a pool that does not exist, your default pool will be used instead.
         /// </summary>
-        public string IpPool { get; set; }
+        public string IpPool { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets the SendAt <see cref="DateTime"/>

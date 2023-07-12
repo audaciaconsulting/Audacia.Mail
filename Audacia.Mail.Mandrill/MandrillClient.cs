@@ -56,11 +56,9 @@ namespace Audacia.Mail.Mandrill
         /// <param name="obj">The object to get a json string from.</param>
         private async Task<HttpResponseMessage> SendPostRequestAsync<T>(string url, T obj)
         {
-            using (var json = JsonContent.Create(obj, new MediaTypeHeaderValue("application/json"), _jsonSerializerOptions))
-            {
-                var response = await _mandrillService.SendEmailAsync(url, json).ConfigureAwait(false);
-                return response;
-            }
+            using var json = JsonContent.Create(obj, new MediaTypeHeaderValue("application/json"), _jsonSerializerOptions);
+            var response = await _mandrillService.SendEmailAsync(url, json).ConfigureAwait(false);
+            return response;
         }
 
         /// <summary>
@@ -70,17 +68,15 @@ namespace Audacia.Mail.Mandrill
         /// <param name="templateName">The name of the template.</param>
         /// <param name="templates">The list of <see cref="MandrillTemplate"/>'s to send.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public virtual async Task<bool?> SendTemplateMessageAsync(MailMessage message, string templateName, List<MandrillTemplate> templates)
+        public virtual async Task<bool?> SendTemplateMessageAsync(MailMessage message, string templateName, List<MandrillTemplate>? templates)
         {
             var mandrillMessage = new MandrillMailMessage(message);
             var sendMessageRequest = new SendMessageRequest(_options.ApiKey, mandrillMessage, _options.Async ? AsyncMode.Enabled : AsyncMode.Disabled);
             var messageRequest = templates != null ?
                 new SendTemplateMessageRequest(sendMessageRequest.Key, sendMessageRequest.Message, templates, templateName, sendMessageRequest.SendAsync) :
                 new SendTemplateMessageRequest(sendMessageRequest.Key, sendMessageRequest.Message, templateName, sendMessageRequest.SendAsync);
-            using (var result = await SendPostRequestAsync($"messages/send-template{_outputFormat}", messageRequest).ConfigureAwait(false))
-            {
-                return result.IsSuccessStatusCode;
-            }
+            using var result = await SendPostRequestAsync($"messages/send-template{_outputFormat}", messageRequest).ConfigureAwait(false);
+            return result.IsSuccessStatusCode;
         }
 
         /// <summary>

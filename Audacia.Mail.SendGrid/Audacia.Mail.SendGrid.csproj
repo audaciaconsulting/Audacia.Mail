@@ -1,16 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <Copyright>Copyright © Audacia 2019</Copyright>
         <PackageVersion>1.2.0</PackageVersion>
         <Authors>Audacia</Authors>
         <Description>SendGrid implementations of the Audacia.Mail interface</Description>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <TargetFramework>netstandard2.0</TargetFramework>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
         <PackageIcon>package-icon.png</PackageIcon>
+		<Nullable>enable</Nullable>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">

@@ -16,12 +16,12 @@ namespace Audacia.Mail.Mandrill.InternalModels.WebhookJsonDeserialisation
         /// <summary>
         /// Gets or sets the url.
         /// </summary>
-        public Uri Url { get; set; }
+        public Uri Url { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets the description.
         /// </summary>
-        public string Description { get; set; }
+        public string Description { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets the creation time.
@@ -46,16 +46,16 @@ namespace Audacia.Mail.Mandrill.InternalModels.WebhookJsonDeserialisation
         /// <summary>
         /// Gets or sets the auth key.
         /// </summary>
-        public string AuthKey { get; set; }
+        public string AuthKey { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets the last error thrown.
         /// </summary>
-        public string LastError { get; set; }
+        public string LastError { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets a list of events.
         /// </summary>
-        public List<string> Events { get; set; }
+        public List<string> Events { get; set; } = new List<string>();
     }
 }

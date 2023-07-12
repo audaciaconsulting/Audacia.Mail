@@ -22,7 +22,7 @@ namespace Audacia.Mail
         }
 
         /// <summary>Gets or sets the message subject.</summary>
-        public string Subject { get; set; }
+        public string Subject { get; set; } = default!;
 
         /// <summary>Gets or sets the format for the text in this message.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
@@ -66,7 +66,7 @@ namespace Audacia.Mail
 
         /// <summary>Gets or sets the body of the email message.</summary>
         /// <value>The body.</value>
-        public string Body { get; set; }
+        public string Body { get; set; } = default!;
 
         /// <summary>
         /// Creates an empty mail message.

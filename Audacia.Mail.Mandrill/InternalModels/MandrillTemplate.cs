@@ -8,11 +8,11 @@ namespace Audacia.Mail.Mandrill.InternalModels
         /// <summary>
         /// Gets or sets the name of the mc:edit editable region to inject to.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets the content to inject.
         /// </summary>
-        public string Content { get; set; }
+        public string Content { get; set; } = default!;
     }
 }

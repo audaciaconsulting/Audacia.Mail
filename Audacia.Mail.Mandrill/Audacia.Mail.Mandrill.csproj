@@ -1,42 +1,43 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <Copyright>Copyright © Audacia 2019</Copyright>
-    <PackageVersion>1.2.0</PackageVersion>
-    <Authors>Audacia</Authors>
-    <Description>Mandrill implementations for the Audacia.Mail interface.</Description>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-    <PackageIcon>package-icon.png</PackageIcon>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Copyright>Copyright © Audacia 2019</Copyright>
+        <PackageVersion>1.2.0</PackageVersion>
+        <Authors>Audacia</Authors>
+        <Description>Mandrill implementations for the Audacia.Mail interface.</Description>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+        <PackageIcon>package-icon.png</PackageIcon>
+		<Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="MandrillHelper.cs~RF4e295c9b.TMP" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Remove="MandrillHelper.cs~RF4e295c9b.TMP" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\package-icon.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+    <ItemGroup>
+        <None Include="..\package-icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Audacia.CodeAnalysis" Version="1.5.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
-    <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
-    <PackageReference Include="System.Text.Json" Version="6.0.2" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Audacia.CodeAnalysis" Version="1.5.1">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+        <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
+        <PackageReference Include="System.Text.Json" Version="6.0.2" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Audacia.Mail\Audacia.Mail.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Audacia.Mail\Audacia.Mail.csproj" />
+    </ItemGroup>
 
 </Project>

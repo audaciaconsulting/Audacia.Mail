@@ -48,7 +48,7 @@ namespace Audacia.Mail.Log
             logMessageBuilder.AppendLine("Sending email");
             logMessageBuilder.AppendLine("Subject: ").Append(message.Subject);
             logMessageBuilder.AppendLine("Sender: ").Append(message.Sender.Address);
-            logMessageBuilder.AppendLine("Recipients: ").Append(string.Join(",", message.Recipients.Select(r => r.Address)));
+            logMessageBuilder.AppendLine("Recipients: ").AppendJoin(",", message.Recipients.Select(r => r.Address));
             logMessageBuilder.AppendLine("Body: ").Append(message.Body);
 
             var logMessage = logMessageBuilder.ToString();

@@ -25,7 +25,7 @@ namespace Audacia.Mail.SendGrid
 		}
 
         private readonly global::SendGrid.SendGridClient _client;
-        private readonly string _defaultSender;
+        private readonly string _defaultSender = default!;
 
 		/// <inheritdoc />
         public void Dispose()
@@ -52,7 +52,7 @@ namespace Audacia.Mail.SendGrid
 			var sendGridMessage = new SendGridMessage
 			{
 				Contents = { new Content { Type = message.Format.ToString(), Value = message.Body } },
-				From = new EmailAddress(message.Sender.Address, message.Sender.Name),
+				From = new EmailAddress(message.Sender?.Address, message.Sender?.Name),
 				Subject = message.Subject,
 				Attachments = message.Attachments.Select(a => new Attachment
 				{
