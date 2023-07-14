@@ -91,12 +91,12 @@ namespace Audacia.Mail.MailKit
 
             if (!_client.IsConnected)
             {
-                await _client.ConnectAsync(Host, Port).ConfigureAwait(true);
+                await _client.ConnectAsync(Host, Port).ConfigureAwait(false);
             }
 
             if (!_client.IsAuthenticated && _client.AuthenticationMechanisms.Any())
             {
-                await _client.AuthenticateAsync(UserName, Password).ConfigureAwait(true);
+                await _client.AuthenticateAsync(UserName, Password).ConfigureAwait(false);
             }
 
             return _client.IsConnected && _client.IsAuthenticated;
@@ -139,7 +139,7 @@ namespace Audacia.Mail.MailKit
 
             var mimeMessage = CreateMimeMessage(message);
 
-            if (await ConnectToClientAsync().ConfigureAwait(true))
+            if (await ConnectToClientAsync().ConfigureAwait(false))
             {
                 await _client!.SendAsync(FormatOptions.Default, mimeMessage, CancellationToken.None).ConfigureAwait(false);
             }
