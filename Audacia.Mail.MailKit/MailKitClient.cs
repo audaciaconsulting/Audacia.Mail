@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MailKit.Net.Smtp;
-using MailKit.Security;
 using MimeKit;
 
 namespace Audacia.Mail.MailKit
@@ -46,43 +45,10 @@ namespace Audacia.Mail.MailKit
             DefaultSender = settings.DefaultSender;
         }
 
-        /// <summary>Initializes a new instance of the <see cref="MailKitClient"/>, then connects and authenticates with the SMTP server.</summary>
-        /// <param name="settings">Settings required to connect to SMTP server.</param>
-        /// <returns>A <see cref="MailKitClient"/>.</returns>
-        public static MailKitClient Connect(SmtpSettings settings)
-        {
-            var client = new MailKitClient(settings);
-            client.ConnectToClient();
-            return client;
-        }
-
-        /// <summary>ConnectToSmtpServer and authenticate with the SMTP server.</summary>
-        /// <returns>If client is connected and authenticated.</returns>
-        /// <exception cref="InvalidOperationException">Throws is <see cref="_client"/> is null.</exception>
-        public bool ConnectToClient()
-        {
-            if (_client == null)
-            {
-                throw new InvalidOperationException($"Client is null and therefore cannot connect.");
-            }
-
-            if (!_client.IsConnected)
-            {
-                _client.Connect(Host, Port, SecureSocketOptions.None);
-            }
-
-            if (!_client.IsAuthenticated && _client.AuthenticationMechanisms.Any())
-            {
-                _client.Authenticate(UserName, Password);
-            }
-
-            return _client.IsConnected && _client.IsAuthenticated;
-        }
-
         /// <summary>ConnectToSmtpServer and authenticate with the SMTP server asynchronously.</summary>
         /// <returns>If client is connected and authenticated.</returns>
         /// <exception cref="InvalidOperationException">Throws is <see cref="_client"/> is null.</exception>
-        public async Task<bool> ConnectToClientAsync()
+        private async Task<bool> ConnectAsync()
         {
             if (_client == null)
             {
@@ -102,27 +68,6 @@ namespace Audacia.Mail.MailKit
             return _client.IsConnected && _client.IsAuthenticated;
         }
 
-        /// <summary>Sends the specified message.</summary>
-        /// <param name="message">The message.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="message"/> is <see langword="null"/>.</exception>
-        public void Send(MailMessage message)
-        {
-            if (message == null) throw new ArgumentNullException(nameof(message));
-
-            if (string.IsNullOrWhiteSpace(message.Sender?.Address) &&
-               !string.IsNullOrWhiteSpace(DefaultSender))
-            {
-                message.Sender = new MailAddress(DefaultSender);
-            }
-
-            var mimeMessage = CreateMimeMessage(message);
-
-            if (ConnectToClient())
-            {
-                _client!.Send(FormatOptions.Default, mimeMessage, CancellationToken.None);
-            }
-        }
-
         /// <summary>Sends the specified message asynchronously.</summary>
         /// <param name="message">The message.</param>
         /// <exception cref="ArgumentNullException"><paramref name="message"/> is <see langword="null"/>.</exception>
@@ -139,7 +84,7 @@ namespace Audacia.Mail.MailKit
 
             var mimeMessage = CreateMimeMessage(message);
 
-            if (await ConnectToClientAsync().ConfigureAwait(false))
+            if (await ConnectAsync().ConfigureAwait(false))
             {
                 await _client!.SendAsync(FormatOptions.Default, mimeMessage, CancellationToken.None).ConfigureAwait(false);
             }
