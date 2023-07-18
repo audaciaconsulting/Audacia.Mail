@@ -17,13 +17,13 @@ namespace Audacia.Mail.MailKit
     public class MailKitClient : IMailClient
     {
         /// <summary>Gets or sets the address to be used when no sender is provided on the email.</summary>
-        public string DefaultSender { get; protected set; }
+        public string DefaultSender { get; protected set; } = default!;
 
         /// <summary>Gets or sets the username to authenticate with.</summary>
-        public string UserName { get; protected set; }
+        public string UserName { get; protected set; } = default!;
 
         /// <summary>Gets or sets the password to authenticate with.</summary>
-        public string Password { get; protected set; }
+        public string Password { get; protected set; } = default!;
 
         /// <summary>Gets the host server address.</summary>
         public string Host { get; }
@@ -31,7 +31,7 @@ namespace Audacia.Mail.MailKit
         /// <summary>Gets the port through which to connect to the host.</summary>
         public int Port { get; }
 
-        private SmtpClient _client = new SmtpClient();
+        private SmtpClient? _client = new SmtpClient();
 
         /// <summary>Initializes a new instance of the <see cref="MailKitClient"/> class.</summary>
         /// <param name="settings">The settings.</param>
@@ -52,14 +52,20 @@ namespace Audacia.Mail.MailKit
         public static MailKitClient Connect(SmtpSettings settings)
         {
             var client = new MailKitClient(settings);
-            client.Connect();
+            _ = client.ConnectToClient();
             return client;
         }
 
         /// <summary>ConnectToSmtpServer and authenticate with the SMTP server.</summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Maintainability", "AV1551:Method overload should call another overload", Justification = "These are not overloads but different methods.")]
-        public void Connect()
+        /// <returns>If client is connected and authenticated.</returns>
+        /// <exception cref="InvalidOperationException">Throws is <see cref="_client"/> is null.</exception>
+        private bool ConnectToClient()
         {
+            if (_client == null)
+            {
+                throw new InvalidOperationException($"Client is null and therefore cannot connect.");
+            }
+
             if (!_client.IsConnected)
             {
                 _client.Connect(Host, Port, SecureSocketOptions.None);
@@ -69,34 +75,31 @@ namespace Audacia.Mail.MailKit
             {
                 _client.Authenticate(UserName, Password);
             }
+
+            return _client.IsConnected && _client.IsAuthenticated;
         }
 
-        /// <summary>Sends the specified message.</summary>
-        /// <param name="message">The message.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="message"/> is <see langword="null"/>.</exception>
-        public void Send(MailMessage message)
+        /// <summary>ConnectToSmtpServer and authenticate with the SMTP server asynchronously.</summary>
+        /// <returns>If client is connected and authenticated.</returns>
+        /// <exception cref="InvalidOperationException">Throws is <see cref="_client"/> is null.</exception>
+        private async Task<bool> ConnectToClientAsync()
         {
-            if (message == null) throw new ArgumentNullException(nameof(message));
-
-            if (string.IsNullOrWhiteSpace(message.Sender?.Address) &&
-               !string.IsNullOrWhiteSpace(DefaultSender))
+            if (_client == null)
             {
-                message.Sender = new MailAddress(DefaultSender);
+                throw new InvalidOperationException($"Client is null and therefore cannot connect.");
             }
-
-            var mimeMessage = CreateMimeMessage(message);
 
             if (!_client.IsConnected)
             {
-                _client.Connect(Host, Port);
+                await _client.ConnectAsync(Host, Port).ConfigureAwait(false);
             }
 
             if (!_client.IsAuthenticated && _client.AuthenticationMechanisms.Any())
             {
-                _client.Authenticate(UserName, Password);
+                await _client.AuthenticateAsync(UserName, Password).ConfigureAwait(false);
             }
 
-            _client.Send(FormatOptions.Default, mimeMessage, CancellationToken.None);
+            return _client.IsConnected && _client.IsAuthenticated;
         }
 
         /// <summary>Sends the specified message asynchronously.</summary>
@@ -115,17 +118,10 @@ namespace Audacia.Mail.MailKit
 
             var mimeMessage = CreateMimeMessage(message);
 
-            if (!_client.IsConnected)
+            if (await ConnectToClientAsync().ConfigureAwait(false))
             {
-                await _client.ConnectAsync(Host, Port).ConfigureAwait(false);
+                await _client!.SendAsync(FormatOptions.Default, mimeMessage, CancellationToken.None).ConfigureAwait(false);
             }
-
-            if (!_client.IsAuthenticated && _client.AuthenticationMechanisms.Any())
-            {
-                await _client.AuthenticateAsync(UserName, Password).ConfigureAwait(false);
-            }
-
-            await _client.SendAsync(FormatOptions.Default, mimeMessage, CancellationToken.None).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -181,18 +177,16 @@ namespace Audacia.Mail.MailKit
         {
             foreach (var attachment in attachments)
             {
-                using (var memoryStream = new MemoryStream(attachment.Bytes.ToArray()))
+                using var memoryStream = new MemoryStream(attachment.Bytes.ToArray());
+                var part = new MimePart(attachment.ContentType)
                 {
-                    var part = new MimePart(attachment.ContentType)
-                    {
-                        Content = new MimeContent(memoryStream),
-                        ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
-                        ContentTransferEncoding = ContentEncoding.Base64,
-                        FileName = attachment.FileName
-                    };
+                    Content = new MimeContent(memoryStream),
+                    ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+                    ContentTransferEncoding = ContentEncoding.Base64,
+                    FileName = attachment.FileName
+                };
 
-                    body.Add(part);
-                }
+                body.Add(part);
             }
         }
     }

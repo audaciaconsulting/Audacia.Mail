@@ -42,42 +42,42 @@ namespace Audacia.Mail.Mandrill
         /// Gets or sets list of recipients for message.
         /// </summary>
         [JsonPropertyName("to")]
-        public List<MandrillMailAddress> To { get; set; }
+        public List<MandrillMailAddress> To { get; set; } = new List<MandrillMailAddress>();
 
         /// <summary>
         /// Gets or sets a list of attachments for message.
         /// </summary>
         [JsonPropertyName("attachments")]
-        public List<MandrillMailAttachment> Attachments { get; set; }
+        public List<MandrillMailAttachment> Attachments { get; set; } = new List<MandrillMailAttachment>();
 
         /// <summary>
         /// Gets or sets the sender email address.
         /// </summary>
         [JsonPropertyName("from_email")]
-        public string FromEmail { get; set; }
+        public string FromEmail { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets the sender name.
         /// </summary>
         [JsonPropertyName("from_name")]
-        public string FromName { get; set; }
+        public string FromName { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets the message subject.
         /// </summary>
         [JsonPropertyName("subject")]
-        public string Subject { get; set; }
+        public string Subject { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets the full HTML content to be sent.
         /// </summary>
         [JsonPropertyName("html")]
-        public string Html { get; set; }
+        public string Html { get; set; } = default!;
 
         /// <summary>
         /// Gets or sets the full text content to be sent.
         /// </summary>
         [JsonPropertyName("text")]
-        public string Text { get; set; }
+        public string Text { get; set; } = default!;
     }
 }

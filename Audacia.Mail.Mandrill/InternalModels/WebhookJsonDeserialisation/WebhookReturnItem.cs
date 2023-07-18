@@ -8,34 +8,34 @@ namespace Audacia.Mail.Mandrill.InternalModels.WebhookJsonDeserialisation
     public class WebhookReturnItem<T> where T : Enum
     {
         /// <summary>Gets or sets the type of event that caused the webhook to be triggered.</summary>
-        public T Event { get; set; }
+        public T Event { get; set; } = default!;
 
         /// <summary>Gets or sets the details of the message that triggered the webhook.</summary>
-        public WebhookMessageItem Msg { get; set; }
+        public WebhookMessageItem Msg { get; set; } = default!;
 
         /// <summary>Gets or sets the ID of the event.</summary>
         [JsonPropertyName("_id")]
-        public string Id { get; set; }
+        public string Id { get; set; } = default!;
 
         /// <summary>Gets or sets the UNIX timestamp of the event.</summary>
         public long Ts { get; set; }
 
         /// <summary>Gets or sets the IP address where the event originated.</summary>
-        public string Ip { get; set; }
+        public string Ip { get; set; } = default!;
 
         /// <summary>Gets or sets the browser or email client where the event occurred.</summary>
         [JsonPropertyName("User_agent")]
-        public string UserAgent { get; set; }
+        public string UserAgent { get; set; } = default!;
 
         /// <summary>Gets or sets the URL of the sent link.</summary>
-        public Uri Url { get; set; }
+        public Uri Url { get; set; } = default!;
 
         /// <summary>Gets or sets the location information of the email stamp if discoverable.</summary>
-        public WebhookLocationItem Location { get; set; }
+        public WebhookLocationItem Location { get; set; } = default!;
 
         /// <summary>Gets or sets the parsed information for an open or click event.</summary>
         [JsonPropertyName("User_agent_parsed")]
-        public WebhookParsedItem UserAgentParsed { get; set; }
+        public WebhookParsedItem UserAgentParsed { get; set; } = default!;
     }
 
     /// <summary>

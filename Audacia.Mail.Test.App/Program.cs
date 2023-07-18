@@ -55,8 +55,7 @@ namespace Audacia.Mail.Test.App
                             }
                         },
                         Subject = $"Test {iteration}: {random.Word()} {random.Word()}",
-                        Body = "<img src=\"https://www.audacia.co.uk/media/pkenoobu/audacia-logo-circle-blue.png\">"
-                               + $"<div><b>{random.Sentence()}</b></div>"
+                        Body = $"<div><b>{random.Sentence()}</b></div>"
                     };
 
                     await SendMailAsync(localMailer, message, iteration);

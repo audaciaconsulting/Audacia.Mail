@@ -1,35 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<OutputType>Exe</OutputType>
-		<TargetFramework>netcoreapp3.1</TargetFramework>
-		<Copyright>Copyright © Audacia 2019</Copyright>
-		<PackageVersion>1.1.0</PackageVersion>
-		<IsPackable>false</IsPackable>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-	</PropertyGroup>
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <Authors>Audacia</Authors>
+        <Description>Tests for Audacia.Mail interface using the Audacia.Mail.Local project.</Description>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <Copyright>Copyright © Audacia 2019</Copyright>
+        <PackageVersion>1.2.0</PackageVersion>
+        <IsPackable>false</IsPackable>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+		<Nullable>enable</Nullable>
+    </PropertyGroup>
 
-	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-		<DocumentationFile>bin\Release\Audacia.Mail.Test.App.xml</DocumentationFile>
-		<WarningsAsErrors>NU1605;CS1591</WarningsAsErrors>
-	</PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DocumentationFile>bin\Release\Audacia.Mail.Test.App.xml</DocumentationFile>
+        <WarningsAsErrors>NU1605;CS1591</WarningsAsErrors>
+    </PropertyGroup>
 
-	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-		<DocumentationFile>bin\Debug\Audacia.Mail.Test.App.Log.xml</DocumentationFile>
-	</PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <DocumentationFile>bin\Debug\Audacia.Mail.Test.App.Log.xml</DocumentationFile>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\Audacia.Mail.Local\Audacia.Mail.Local.csproj" />
-		<ProjectReference Include="..\Audacia.Mail.Log\Audacia.Mail.Log.csproj" />
-	</ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Audacia.Mail.Local\Audacia.Mail.Local.csproj" />
+        <ProjectReference Include="..\Audacia.Mail.Log\Audacia.Mail.Log.csproj" />
+    </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Audacia.CodeAnalysis" Version="1.3.0">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Audacia.Random" Version="3.0.55181.19352" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Audacia.CodeAnalysis" Version="1.5.1">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Audacia.Random" Version="3.0.55181.19352" />
+    </ItemGroup>
 
 </Project>

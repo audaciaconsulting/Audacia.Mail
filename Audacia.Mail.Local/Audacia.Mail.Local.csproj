@@ -1,41 +1,45 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<Copyright>Copyright © Audacia 2019</Copyright>
-		<PackageVersion>1.1.0</PackageVersion>
-		<Description>Implementations of the Audacia.Mail interfaces for sending emails to a local machine for testing purposes.</Description>
-		<TargetFramework>netstandard2.0</TargetFramework>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-    <PackageIcon>audacia-logo-circle-blue.png</PackageIcon>
-	</PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Copyright>Copyright © Audacia 2019</Copyright>
+        <PackageVersion>1.2.0</PackageVersion>
+        <Authors>Audacia</Authors>
+        <Description>Implementations of the Audacia.Mail interfaces for sending emails to a local machine for testing purposes.</Description>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+        <PackageIcon>package-icon.png</PackageIcon>
+		<Nullable>enable</Nullable>
+    </PropertyGroup>
 
-	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-		<DocumentationFile>bin\Release\Audacia.Mail.Local.xml</DocumentationFile>
-		<WarningsAsErrors>NU1605;CS1591</WarningsAsErrors>
-	</PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DocumentationFile>bin\Release\Audacia.Mail.Local.xml</DocumentationFile>
+        <WarningsAsErrors>NU1605;CS1591</WarningsAsErrors>
+    </PropertyGroup>
 
-	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-		<DocumentationFile>bin\Debug\Audacia.Mail.Local.xml</DocumentationFile>
-	</PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <DocumentationFile>bin\Debug\Audacia.Mail.Local.xml</DocumentationFile>
+    </PropertyGroup>
 
-	<ItemGroup>
-	  <None Include="..\audacia-logo-circle-blue.png">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
-	</ItemGroup>
+    <ItemGroup>
+        <None Include="..\package-icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\Audacia.Mail.MailKit\Audacia.Mail.MailKit.csproj" />
-		<ProjectReference Include="..\Audacia.Mail\Audacia.Mail.csproj" />
-	</ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Audacia.Mail.MailKit\Audacia.Mail.MailKit.csproj" />
+        <ProjectReference Include="..\Audacia.Mail\Audacia.Mail.csproj" />
+    </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Audacia.CodeAnalysis" Version="1.3.0">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Audacia.CodeAnalysis" Version="1.5.1">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
 
 </Project>
