@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -167,14 +168,15 @@ namespace Audacia.Mail.MailKit
             return message;
         }
 
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "Stream needs to be initialised inline to prevent an ObjectDisposedException being thrown when the email is sent.")]
         private static void AddAttachments(Multipart body, IList<MailAttachment> attachments)
         {
             foreach (var attachment in attachments)
             {
-                using var memoryStream = new MemoryStream(attachment.Bytes.ToArray());
                 var part = new MimePart(attachment.ContentType)
                 {
-                    Content = new MimeContent(memoryStream),
+                    // Note: The memory stream must be created inline to prevent an ObjectDisposedException being thrown when the email is sent by the mail client.
+                    Content = new MimeContent(new MemoryStream(attachment.Bytes.ToArray())),
                     ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
                     ContentTransferEncoding = ContentEncoding.Base64,
                     FileName = attachment.FileName
