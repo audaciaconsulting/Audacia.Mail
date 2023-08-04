@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <Authors>Audacia</Authors>
         <Description>Tests for Audacia.Mail interface using the Audacia.Mail.Local project.</Description>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>

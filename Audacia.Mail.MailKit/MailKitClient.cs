@@ -52,14 +52,14 @@ namespace Audacia.Mail.MailKit
         public static MailKitClient Connect(SmtpSettings settings)
         {
             var client = new MailKitClient(settings);
-            _ = client.ConnectToClient();
+            client.ConnectToClient();
+
             return client;
         }
 
         /// <summary>ConnectToSmtpServer and authenticate with the SMTP server.</summary>
-        /// <returns>If client is connected and authenticated.</returns>
         /// <exception cref="InvalidOperationException">Throws is <see cref="_client"/> is null.</exception>
-        private bool ConnectToClient()
+        private void ConnectToClient()
         {
             if (_client == null)
             {
@@ -75,14 +75,12 @@ namespace Audacia.Mail.MailKit
             {
                 _client.Authenticate(UserName, Password);
             }
-
-            return _client.IsConnected && _client.IsAuthenticated;
         }
 
         /// <summary>ConnectToSmtpServer and authenticate with the SMTP server asynchronously.</summary>
-        /// <returns>If client is connected and authenticated.</returns>
+        /// <returns>A <see cref="Task"/> representing the completion of the action.</returns>
         /// <exception cref="InvalidOperationException">Throws is <see cref="_client"/> is null.</exception>
-        private async Task<bool> ConnectToClientAsync()
+        private async Task ConnectToClientAsync()
         {
             if (_client == null)
             {
@@ -98,8 +96,6 @@ namespace Audacia.Mail.MailKit
             {
                 await _client.AuthenticateAsync(UserName, Password).ConfigureAwait(false);
             }
-
-            return _client.IsConnected && _client.IsAuthenticated;
         }
 
         /// <summary>Sends the specified message asynchronously.</summary>
@@ -118,10 +114,8 @@ namespace Audacia.Mail.MailKit
 
             var mimeMessage = CreateMimeMessage(message);
 
-            if (await ConnectToClientAsync().ConfigureAwait(false))
-            {
-                await _client!.SendAsync(FormatOptions.Default, mimeMessage, CancellationToken.None).ConfigureAwait(false);
-            }
+            await ConnectToClientAsync().ConfigureAwait(false);
+            await _client!.SendAsync(FormatOptions.Default, mimeMessage, CancellationToken.None).ConfigureAwait(false);
         }
 
         /// <summary>

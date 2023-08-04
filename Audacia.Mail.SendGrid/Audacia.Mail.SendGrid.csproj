@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Copyright>Copyright © Audacia 2019</Copyright>
-        <PackageVersion>1.2.0</PackageVersion>
+        <Version>1.2.0</Version>
         <Authors>Audacia</Authors>
         <Description>SendGrid implementations of the Audacia.Mail interface</Description>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -11,7 +11,7 @@
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
         <PackageIcon>package-icon.png</PackageIcon>
-		<Nullable>enable</Nullable>
+		    <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
