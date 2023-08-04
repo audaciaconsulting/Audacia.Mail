@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <PackageVersion>1.2.0</PackageVersion>
+        <Version>1.2.0</Version>
         <Authors>Audacia</Authors>
         <Description>Implementations of the Audacia.Mail interfaces for logging emails to a console.</Description>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>

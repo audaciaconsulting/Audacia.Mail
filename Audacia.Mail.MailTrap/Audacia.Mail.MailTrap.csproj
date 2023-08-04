@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Copyright>Copyright © Audacia 2019</Copyright>
-        <PackageVersion>1.2.0</PackageVersion>
+        <Version>1.2.0</Version>
         <Authors>Audacia</Authors>
         <Description>Mailtrap implementation of the Audacia.Mail interface.</Description>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
