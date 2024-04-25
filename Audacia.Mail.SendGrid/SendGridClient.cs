@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SendGrid.Helpers.Mail;
@@ -51,8 +52,8 @@ namespace Audacia.Mail.SendGrid
 
 			var sendGridMessage = new SendGridMessage
 			{
-				Contents = { new Content { Type = message.Format.ToString(), Value = message.Body } },
-				From = new EmailAddress(message.Sender?.Address, message.Sender?.Name),
+                Contents = new List<Content> { new Content { Type = message.Format.ToString(), Value = message.Body } },
+                From = new EmailAddress(message.Sender?.Address, message.Sender?.Name),
 				Subject = message.Subject,
 				Attachments = message.Attachments.Select(a => new Attachment
 				{
