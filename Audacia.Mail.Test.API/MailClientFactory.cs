@@ -19,11 +19,11 @@ public class MailClientFactory : IMailClientFactory
     public IMailClient CreateMailClient(HttpRequest request)
     {
         request.TryParseCustomHeaderValueIntoBoolean(
-            _smtpOptions.EmailDryRunHeaderName ?? string.Empty,
-            out bool emailDryRun
+            _smtpOptions.DontSendEmailHeaderName ?? string.Empty,
+            out bool dontSendEmail
             );
 
-        return emailDryRun
+        return dontSendEmail
             ? new NoopMailClient()
             : _smtpOptions.EmailClientType switch
             {
