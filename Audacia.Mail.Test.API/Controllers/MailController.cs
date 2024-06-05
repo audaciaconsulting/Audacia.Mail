@@ -8,11 +8,11 @@ namespace Audacia.Mail.Test.API.Controllers;
 public class MailController : Controller
 {
     private readonly IMailService _mailService;
-    private readonly IMailClientHandlerFactory _mailClientHandlerFactory;
+    private readonly IMailClientFactory _mailClientHandlerFactory;
 
     public MailController(
         IMailService mailService,
-        IMailClientHandlerFactory mailClientHandlerFactory
+        IMailClientFactory mailClientHandlerFactory
         )
     {
         _mailService = mailService ?? throw new ArgumentNullException(nameof(mailService));

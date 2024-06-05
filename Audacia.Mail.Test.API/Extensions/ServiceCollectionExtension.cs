@@ -20,6 +20,6 @@ public static class ServiceCollectionExtension
         return services
             .AddSingleton(smtpOptions)
             .AddSingleton(senderAddress)
-            .AddSingleton<IMailClientHandlerFactory, MailClientHandlerFactory>();
+            .AddSingleton<IMailClientFactory, MailClientFactory>();
     }
 }

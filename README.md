@@ -167,18 +167,18 @@ public class PasswordEmailService : IPasswordEmailService
 }
 ```
 
-### Using IMailClient Interface in IoC pattern
-Creating a MailClientHandelerFactory can enable to use different implementationsof IMailClientat runtime. This can be done based on a Http request custome header.
+### Use case: Able to perform dry run for email sending functionality based on http custom header
+`NoopMailClient` helps us to mimic the email sending functionality without actually sending the email to the external provider. The following example code can help reduce the amount of external calls from this nuget package just by providing a custom header in the API request payload.
 
-In order to set this up first create `MailClientHandlerFactory`
+First create a `MailClientFactory`
 ```csharp
 namespace Audacia.Mail.Test.API;
 
-public class MailClientHandlerFactory : IMailClientHandlerFactory
+public class MailClientFactory : IMailClientFactory
 {
     private readonly SmtpOptions _smtpOptions;
 
-    public MailClientHandlerFactory(
+    public MailClientFactory(
         SmtpOptions smtpOptions
         )
     {
@@ -188,22 +188,22 @@ public class MailClientHandlerFactory : IMailClientHandlerFactory
     public IMailClient CreateMailClient(HttpRequest request)
     {
         request.TryParseCustomHeaderValueIntoBoolean(
-            _smtpOptions.DontForwardMessageToProviderCustomHeaderName ?? string.Empty,
-            out bool dontForwardMessageToProvider
+            _smtpOptions.EmailDryRunHeaderName ?? string.Empty,
+            out bool emailDryRun
             );
 
-        return dontForwardMessageToProvider
-            ? (IMailClient)Activator.CreateInstance(typeof(NoopMailClient))
+        return emailDryRun
+            ? new NoopMailClient()
             : _smtpOptions.EmailClientType switch
             {
-                EmailClientType.None => (IMailClient)Activator.CreateInstance(typeof(NoopMailClient)),
-                _ => (IMailClient)Activator.CreateInstance(typeof(MailKitClient), _smtpOptions)
+                EmailClientType.None => new NoopMailClient(),
+                _ => new MailKitClient(_smtpOptions)
             };
     }
 }
 ```
 
-Extract `IMailClientHandlerFactory` from this class. Using DI add this interfcase as singleton.
+Extract `IMailClientFactory` from this class. Using DI add this interfcase as singleton.
 
 An extension method can be created against `HttpRequest` which tryes to extract value from a given custom header name
 
@@ -224,7 +224,7 @@ public static class HttpRequestExtension
 }
 ```
 
-Now we can use `IMailClientHandlerFactory` at controller level
+Now we can use `IMailClientFactory` at controller level
 
 ```csharp
 namespace Audacia.Mail.Test.API.Controllers;
@@ -233,11 +233,11 @@ namespace Audacia.Mail.Test.API.Controllers;
 public class MailController : Controller
 {
     private readonly IMailService _mailService;
-    private readonly IMailClientHandlerFactory _mailClientHandlerFactory;
+    private readonly IMailClientFactory _mailClientHandlerFactory;
 
     public MailController(
         IMailService mailService,
-        IMailClientHandlerFactory mailClientHandlerFactory
+        IMailClientFactory mailClientHandlerFactory
         )
     {
         _mailService = mailService ?? throw new ArgumentNullException(nameof(mailService));
@@ -256,7 +256,7 @@ public class MailController : Controller
 }
 ```
 
-Thsi enables us to interact with multiple `IMailClient` implementations at runtime based on custom logic. A working example can be found under `Audacia.Mail.Test.API` project.
+This enables us to interact with multiple `IMailClient` implementations at runtime based on custom logic. Full working example can be found under `Audacia.Mail.Test.API` project.
 
 ## Implementations
 

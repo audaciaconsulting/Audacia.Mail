@@ -1,6 +1,6 @@
 ﻿namespace Audacia.Mail.Test.API;
 
-public interface IMailClientHandlerFactory
+public interface IMailClientFactory
 {
     IMailClient CreateMailClient(HttpRequest request);
 }

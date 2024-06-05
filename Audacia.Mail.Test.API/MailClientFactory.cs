@@ -5,11 +5,11 @@ using Audacia.Mail.Test.API.Settings;
 
 namespace Audacia.Mail.Test.API;
 
-public class MailClientHandlerFactory : IMailClientHandlerFactory
+public class MailClientFactory : IMailClientFactory
 {
     private readonly SmtpOptions _smtpOptions;
 
-    public MailClientHandlerFactory(
+    public MailClientFactory(
         SmtpOptions smtpOptions
         )
     {
@@ -19,16 +19,16 @@ public class MailClientHandlerFactory : IMailClientHandlerFactory
     public IMailClient CreateMailClient(HttpRequest request)
     {
         request.TryParseCustomHeaderValueIntoBoolean(
-            _smtpOptions.DontForwardMessageToProviderCustomHeaderName ?? string.Empty,
-            out bool dontForwardMessageToProvider
+            _smtpOptions.EmailDryRunHeaderName ?? string.Empty,
+            out bool emailDryRun
             );
 
-        return dontForwardMessageToProvider
-            ? (IMailClient)Activator.CreateInstance(typeof(NoopMailClient))
+        return emailDryRun
+            ? new NoopMailClient()
             : _smtpOptions.EmailClientType switch
             {
-                EmailClientType.None => (IMailClient)Activator.CreateInstance(typeof(NoopMailClient)),
-                _ => (IMailClient)Activator.CreateInstance(typeof(MailKitClient), _smtpOptions)
+                EmailClientType.None => new NoopMailClient(),
+                _ => new MailKitClient(_smtpOptions)
             };
     }
 }

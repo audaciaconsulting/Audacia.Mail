@@ -8,7 +8,7 @@ public class SmtpOptions : SmtpSettings
 
     public bool EnableSsl { get; set; }
 
-    public string? DontForwardMessageToProviderCustomHeaderName { get; set; }
+    public string? EmailDryRunHeaderName { get; set; }
 }
 
 public class EmailSenderDetails
