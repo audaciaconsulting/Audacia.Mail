@@ -167,6 +167,97 @@ public class PasswordEmailService : IPasswordEmailService
 }
 ```
 
+### Use case: Ability to test email sending functionality without actually sending an external email out to provider based on http custom header
+`NoopMailClient` helps us to mimic the email sending functionality without actually sending the email to the external provider. The following example code can help reduce the amount of external calls from this nuget package just by providing a custom header in the API request payload.
+
+First create a `MailClientFactory`
+```csharp
+namespace Audacia.Mail.Test.API;
+
+public class MailClientFactory : IMailClientFactory
+{
+    private readonly SmtpOptions _smtpOptions;
+
+    public MailClientFactory(
+        SmtpOptions smtpOptions
+        )
+    {
+        _smtpOptions = smtpOptions ?? throw new ArgumentNullException(nameof(smtpOptions));
+    }
+
+    public IMailClient CreateMailClient(HttpRequest request)
+    {
+        request.TryParseCustomHeaderValueIntoBoolean(
+            _smtpOptions.DontSendEmailHeaderName ?? string.Empty,
+            out bool dontSendEmail
+            );
+
+        return dontSendEmail
+            ? new NoopMailClient()
+            : _smtpOptions.EmailClientType switch
+            {
+                EmailClientType.None => new NoopMailClient(),
+                _ => new MailKitClient(_smtpOptions)
+            };
+    }
+}
+```
+
+Extract `IMailClientFactory` from this class. Using DI add this interface as singleton.
+
+An extension method can be created against `HttpRequest` which tryes to extract value from a given custom header name
+
+```csharp
+namespace Audacia.Mail.Test.API.Extensions;
+
+public static class HttpRequestExtension
+{
+    public static bool TryParseCustomHeaderValueIntoBoolean(this HttpRequest request, string headerName, out bool headerValue)
+    {
+        if (request.Headers.TryGetValue(headerName, out var headerStringValue))
+        {
+            return bool.TryParse(headerStringValue, out headerValue);
+        }
+
+        return headerValue = false;
+    }
+}
+```
+
+Now we can use `IMailClientFactory` at controller level
+
+```csharp
+namespace Audacia.Mail.Test.API.Controllers;
+[ApiController]
+[Route("[controller]")]
+public class MailController : Controller
+{
+    private readonly IMailService _mailService;
+    private readonly IMailClientFactory _mailClientFactory;
+
+    public MailController(
+        IMailService mailService,
+        IMailClientFactory mailClientFactory
+        )
+    {
+        _mailService = mailService ?? throw new ArgumentNullException(nameof(mailService));
+        _mailClientFactory = mailClientFactory ?? throw new ArgumentNullException(nameof(mailClientFactory));
+    }
+
+    [HttpPost(Name = "SendMail")]
+    public async Task<IActionResult> SendMailAsync([FromBody]SendMailRequest sendMailRequest)
+    {
+        var mailClient = _mailClientFactory.CreateMailClient(HttpContext.Request);
+
+        await _mailService.SendMailAsync(sendMailRequest, mailClient);
+
+        return Ok();
+    }
+}
+```
+
+This enables us to interact with multiple `IMailClient` implementations at runtime based on custom logic. Full working example can be found under `Audacia.Mail.Test.API` project.
+
 ## Implementations
 
 ### `Audacia.Mail.Local`

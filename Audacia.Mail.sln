@@ -28,6 +28,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audacia.Mail.Noop", "Audaci
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audacia.Mail.Mandrill", "Audacia.Mail.Mandrill\Audacia.Mail.Mandrill.csproj", "{4C0437F4-24A6-4493-8D73-ABF065D953BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audacia.Mail.Test.API", "Audacia.Mail.Test.API\Audacia.Mail.Test.API.csproj", "{EA106F55-B94F-4FF1-B71B-01897AB56AB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,10 @@ Global
 		{4C0437F4-24A6-4493-8D73-ABF065D953BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C0437F4-24A6-4493-8D73-ABF065D953BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C0437F4-24A6-4493-8D73-ABF065D953BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA106F55-B94F-4FF1-B71B-01897AB56AB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA106F55-B94F-4FF1-B71B-01897AB56AB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA106F55-B94F-4FF1-B71B-01897AB56AB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA106F55-B94F-4FF1-B71B-01897AB56AB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
