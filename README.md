@@ -203,7 +203,7 @@ public class MailClientFactory : IMailClientFactory
 }
 ```
 
-Extract `IMailClientFactory` from this class. Using DI add this interfcase as singleton.
+Extract `IMailClientFactory` from this class. Using DI add this interface as singleton.
 
 An extension method can be created against `HttpRequest` which tryes to extract value from a given custom header name
 
