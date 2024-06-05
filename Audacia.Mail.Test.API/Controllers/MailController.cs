@@ -8,21 +8,21 @@ namespace Audacia.Mail.Test.API.Controllers;
 public class MailController : Controller
 {
     private readonly IMailService _mailService;
-    private readonly IMailClientFactory _mailClientHandlerFactory;
+    private readonly IMailClientFactory _mailClientFactory;
 
     public MailController(
         IMailService mailService,
-        IMailClientFactory mailClientHandlerFactory
+        IMailClientFactory mailClientFactory
         )
     {
         _mailService = mailService ?? throw new ArgumentNullException(nameof(mailService));
-        _mailClientHandlerFactory = mailClientHandlerFactory ?? throw new ArgumentNullException(nameof(mailClientHandlerFactory));
+        _mailClientFactory = mailClientFactory ?? throw new ArgumentNullException(nameof(mailClientFactory));
     }
 
     [HttpPost(Name = "SendMail")]
     public async Task<IActionResult> SendMailAsync([FromBody]SendMailRequest sendMailRequest)
     {
-        var mailClient = _mailClientHandlerFactory.CreateMailClient(HttpContext.Request);
+        var mailClient = _mailClientFactory.CreateMailClient(HttpContext.Request);
 
         await _mailService.SendMailAsync(sendMailRequest, mailClient);
 
