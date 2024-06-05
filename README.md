@@ -167,7 +167,7 @@ public class PasswordEmailService : IPasswordEmailService
 }
 ```
 
-### Use case: Able to perform dry run for email sending functionality based on http custom header
+### Use case: Ability to test email sending functionality without actually sending an external email out to provider based on http custom header
 `NoopMailClient` helps us to mimic the email sending functionality without actually sending the email to the external provider. The following example code can help reduce the amount of external calls from this nuget package just by providing a custom header in the API request payload.
 
 First create a `MailClientFactory`
