@@ -6,7 +6,7 @@
     public enum HostType
     {
         /// <summary>
-        /// Represents prodction host.
+        /// Represents production host.
         /// </summary>
         Production,
 
