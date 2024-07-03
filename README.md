@@ -350,10 +350,14 @@ public MailtrapClient(string username, string password)
 
 You can also use Mailtrap sever for sending production emails.
 ```csharp
-public MailtrapClient(string username, string password, HostType hosttype)
-    : base(GetSettings(username, password, hosttype))
+public MailtrapClient(string username, string password, HostType hostType)
+    : base(GetSettings(username, password, hostType))
 {
 }
+```
+usage for production
+```csharp
+var mailTrapClient = new MailtrapClient("userName", "password", HostType.Production);
 ```
 
 `MailtrapClient` also inherits `MailKitClient` and similar to the `DevMailClient` it creates a new `SmtpSettings` object with the private method `GetSettings`.

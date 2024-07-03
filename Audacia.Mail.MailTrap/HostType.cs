@@ -6,13 +6,13 @@
     public enum HostType
     {
         /// <summary>
-        /// Represents production host.
-        /// </summary>
-        Production,
-
-        /// <summary>
         /// Represents test host.
         /// </summary>
-        Test
+        Test,
+        
+        /// <summary>
+        /// Represents production host.
+        /// </summary>
+        Production
     }
 }
