@@ -343,9 +343,21 @@ public void Connect()
 Send mail to the Mailtrap server for testing purposes. Uses the MailKit SMTP implementation.
 ```csharp
 public MailtrapClient(string username, string password)
-    : base(GetSettings(username, password))
+    : base(GetSettings(username, password, HostType.Test))
 {
 }
+```
+
+You can also use Mailtrap sever for sending production emails.
+```csharp
+public MailtrapClient(string username, string password, HostType hostType)
+    : base(GetSettings(username, password, hostType))
+{
+}
+```
+usage for production
+```csharp
+var mailTrapClient = new MailtrapClient("userName", "password", HostType.Production);
 ```
 
 `MailtrapClient` also inherits `MailKitClient` and similar to the `DevMailClient` it creates a new `SmtpSettings` object with the private method `GetSettings`.
