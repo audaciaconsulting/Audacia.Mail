@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		build.yaml = build.yaml
 		README.md = README.md
+		CHANGELOG.md = CHANGELOG.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audacia.Mail.Log", "Audacia.Mail.Log\Audacia.Mail.Log.csproj", "{EE577F2F-0757-46BA-B2F1-0C3E0BC67370}"
