@@ -2,7 +2,10 @@
 
 ## 1.3.1 - 2024-07-03
 ### Added
-- Added support for MailTrapClient ([20c88b7](https://github.com/audaciaconsulting/Audacia.Mail/pull/4/commits/20c88b7d4563a76b102e081fc988b18880419f94))
+- No new functionality added
+
+### Changed
+- Added support for passing in the host to the MailTrapClient ([20c88b7](https://github.com/audaciaconsulting/Audacia.Mail/pull/4/commits/20c88b7d4563a76b102e081fc988b18880419f94))
 
 ## 1.3.0 - 2024-04-25
 ### Added
