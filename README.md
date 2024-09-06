@@ -3,7 +3,8 @@ Standardized interfaces for common email-sending functionality. The library with
 
 ## Contents
 1. [Usage](#usage)
-1. [Implementations](#implementations)
+2. [Implementations](#implementations)
+3. [Change History](#change-history)
 
 ## Usage
 This set of libraries facilitates the sending of emails through a standard set of interfaces each implementing the IMailClient interface. Several different implementations are provided:
@@ -466,6 +467,9 @@ public MandrillWebhookProvider(IMandrillService mandrillService, MandrillOptions
     _options = options;
 }
 ```
+
+# Change History
+The `Audacia.Mail` repository change history can be found in this [changelog](./CHANGELOG.md)
 
 # Contributing
 We welcome contributions! Please feel free to check our [Contribution Guidlines](https://github.com/audaciaconsulting/.github/blob/main/CONTRIBUTING.md) for feature requests, issue reporting and guidelines.
