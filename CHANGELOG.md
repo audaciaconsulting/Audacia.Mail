@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.3.1.2 - 2024-09-06
+## 1.3.2 - 2024-09-19
 ### Added
 - Bcc functionality added for SendGrid client.
 
