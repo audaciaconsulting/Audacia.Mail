@@ -68,7 +68,14 @@ namespace Audacia.Mail.SendGrid
                 }).ToList();
             }
 
-            var recipients = message.Recipients.Select(r => new EmailAddress
+            AddRecipients(sendGridMessage, message);
+
+            return _client.SendEmailAsync(sendGridMessage);
+        }
+
+        private static void AddRecipients(SendGridMessage sendGridMessage, MailMessage mailMessage) 
+        {
+            var recipients = mailMessage.Recipients.Select(r => new EmailAddress
             {
                 Name = r.Name,
                 Email = r.Address
@@ -76,7 +83,27 @@ namespace Audacia.Mail.SendGrid
 
             sendGridMessage.AddTos(recipients);
 
-            return _client.SendEmailAsync(sendGridMessage);
+            var cc = mailMessage.Cc.Select(b => new EmailAddress
+            {
+                Name = b.Name,
+                Email = b.Address
+            }).ToList();
+
+            if (cc.Any()) 
+            {
+                sendGridMessage.AddCcs(cc);
+            }
+
+            var bcc = mailMessage.Bcc.Select(b => new EmailAddress
+            {
+                Name = b.Name,
+                Email = b.Address
+            }).ToList();
+
+            if (bcc.Any()) 
+            {
+                sendGridMessage.AddBccs(bcc);
+            }
         }
     }
 }
