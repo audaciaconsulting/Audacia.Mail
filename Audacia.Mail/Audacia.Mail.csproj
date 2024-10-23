@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <Version>1.3.1</Version>
+        <Version>1.3.4</Version>
         <Authors>Audacia</Authors>
         <Description>Standardized interfaces for sending e-mail.</Description>
         <Copyright>Copyright © Audacia 2019</Copyright>
