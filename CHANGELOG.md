@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.3.5 - 2024-11-21
+### Added 
+- No new functionality added
+
+### Changed
+- No functionality changed
+
+### Fixed
+- Updated vulnerable dependencies ([#7](https://github.com/audaciaconsulting/Audacia.Mail/pull/7))
+
 ## 1.3.4 - 2024-09-19
 ### Added
 - Bcc functionality added for SendGrid client.
