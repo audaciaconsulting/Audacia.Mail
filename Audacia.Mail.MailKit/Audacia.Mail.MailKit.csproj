@@ -3,7 +3,6 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Copyright>Copyright © Audacia 2019</Copyright>
-        <Version>1.3.5</Version>
         <Authors>Audacia</Authors>
         <Description>Mailkit implementations for the Audacia.Mail interface.</Description>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
