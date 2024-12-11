@@ -8,9 +8,7 @@ namespace Audacia.Mail
     {
         private MailFormat _format = MailFormat.Plain;
         private MailAddress _sender = new MailAddress();
-
-        /// <summary>Initializes a new instance of the <see cref="MailMessage"/> class.</summary>
-        /// <param name="recipients">An array of email addresses specifying the recipients of the message.</param>
+// <param name="recipients">An array of email addresses specifying the recipients of the message.</param>
         public MailMessage(params string[] recipients)
         {
             if (recipients == null) throw new ArgumentNullException(nameof(recipients));
