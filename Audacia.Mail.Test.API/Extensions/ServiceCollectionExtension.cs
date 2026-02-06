@@ -13,7 +13,12 @@ public static class ServiceCollectionExtension
 
         var smtpOptions = configuration.GetSection("SmtpOptions").Get<SmtpOptions>();
 
-        var senderAddress = smtpOptions.FromEmailAddress != null
+        if (smtpOptions == null)
+        {
+            throw new InvalidOperationException("Missing required configuration section: SmtpOptions.");
+        }
+
+        var senderAddress = !string.IsNullOrWhiteSpace(smtpOptions.FromEmailAddress)
             ? new EmailSenderDetails(smtpOptions.FromEmailAddress)
             : new EmailSenderDetails();
 
