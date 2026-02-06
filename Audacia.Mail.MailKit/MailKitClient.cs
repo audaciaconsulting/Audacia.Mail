@@ -113,7 +113,7 @@ namespace Audacia.Mail.MailKit
                 message.Sender = new MailAddress(DefaultSender);
             }
 
-            var mimeMessage = CreateMimeMessage(message);
+            using var mimeMessage = CreateMimeMessage(message);
 
             await ConnectToClientAsync().ConfigureAwait(false);
             await _client!.SendAsync(FormatOptions.Default, mimeMessage, CancellationToken.None).ConfigureAwait(false);
@@ -139,6 +139,7 @@ namespace Audacia.Mail.MailKit
             }
         }
 
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "MimeMessage owns body parts and disposes them when the message is disposed.")]
         private static MimeMessage CreateMimeMessage(MailMessage mailMessage)
         {
             var body = new Multipart("mixed")
