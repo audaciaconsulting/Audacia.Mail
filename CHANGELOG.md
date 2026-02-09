@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.3.6 - 2026-02-09
+### Added
+- No new functionality added
+
+### Changed
+- Upgraded test apps to target net10.0.
+- Updated dependencies including Audacia.CodeAnalysis, MailKit, Swashbuckle, and related Microsoft.Extensions packages.
+
+### Fixed
+- Dispose MailKit MimeMessage after sending to avoid resource leaks.
+- Throw a clear error when required SmtpOptions configuration is missing.
+
 ## 1.3.5 - 2024-11-21
 ### Added 
 - No new functionality added
