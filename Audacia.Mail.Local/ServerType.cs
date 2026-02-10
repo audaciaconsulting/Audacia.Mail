@@ -10,7 +10,7 @@ namespace Audacia.Mail.Local
 		Papercut,
 
         /// <summary>Use smtp4dev.</summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "AV1704:Identifier contains one or more digits in its name", Justification = "This is the name of the application.")]
-        Smtp4dev
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "ACL1014:Field contains one or more digits in its name", Justification = "This is the name of the application.")]
+		Smtp4dev
 	}
 }
