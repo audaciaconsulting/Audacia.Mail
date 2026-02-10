@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.3.6 - 2026-02-09
+## 1.4.0 - 2026-02-09
 ### Added
 - No new functionality added
 
