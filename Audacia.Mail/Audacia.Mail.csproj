@@ -3,7 +3,6 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Authors>Audacia</Authors>
-        <Version>1.3.5</Version>
         <Description>Standardized interfaces for sending e-mail.</Description>
         <Copyright>Copyright © Audacia 2019</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
