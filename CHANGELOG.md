@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.4.2 - 2026-05-12
+### Added
+- No new functionality added
+
+### Changed
+- Updated Mailkit dependency to 4.16.0 to address security vulnerabilities.
+
 ## 1.4.1 - 2026-03-18
 ### Added
 - No new functionality added
