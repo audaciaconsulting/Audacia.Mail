@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.4.4 - 2026-10-14
+
+### Added
+
+- No new functionality added
+
+### Changed
+
+- Updated MailKit dependency to 4.18.1.
+- Updated System.Security.Cryptography.Pkcs dependency to 10.0.13.
+
 ## 1.4.3 - 2026-10-05
 
 ### Added
