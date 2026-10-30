@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.4.4 - 2026-10-14
+
+### Added
+
+- No new functionality added
+
+### Changed
+
+- Updated MailKit dependency to 4.18.1.
+- Updated System.Security.Cryptography.Pkcs dependency to 10.0.13.
+- Updated Microsoft.Extensions.DependencyInjection.Abstractions to 10.0.13.
+- Updated Microsoft.Extensions.Http to 10.0.13.
+- Updated System.Net.Http.Json to 10.0.13.
+- Updated System.Text.Json to 10.0.13.
+- Updated Swashbuckle.AspNetCore to 10.3.0.
+
 ## 1.4.3 - 2026-10-05
 
 ### Added
