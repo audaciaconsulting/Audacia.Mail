@@ -1,14 +1,16 @@
 name: Dependabot reviewer checklist
 on:
   pull_request_target:
-    types: [opened]
+    types: [opened, reopened, closed]
 
 permissions:
   pull-requests: write
 
+# Jobs check the PR author rather than github.actor, as on 'closed' and
+# 'reopened' the actor is whoever merged/closed/reopened the PR.
 jobs:
   checklist:
-    if: github.actor == 'dependabot[bot]'
+    if: github.event.action == 'opened' && github.event.pull_request.user.login == 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Post reviewer checklist
@@ -23,3 +25,19 @@ jobs:
           - [ ] Build has been run locally
           - [ ] Version numbers in `.csproj` or `Directory.Build.props` have been incremented correctly
           EOF
+
+  # Repos can opt out by setting the repository variable DEPENDABOT_TEAMS_NOTIFY to 'false'.
+  notify-teams:
+    if: github.event.action == 'opened' && github.event.pull_request.user.login == 'dependabot[bot]' && vars.DEPENDABOT_TEAMS_NOTIFY != 'false'
+    permissions: {}
+    uses: audaciaconsulting/Audacia.DependabotConfig/.github/workflows/notify-teams.yaml@main
+    secrets:
+      TEAMS_WEBHOOK_URL: ${{ secrets.DEPENDABOT_TEAMS_WEBHOOK }}
+
+  # Repos can opt out by setting the repository variable DEPENDABOT_TRACKING_ISSUES to 'false'.
+  tracking-issue:
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && vars.DEPENDABOT_TRACKING_ISSUES != 'false'
+    permissions:
+      issues: write
+      pull-requests: write
+    uses: audaciaconsulting/Audacia.DependabotConfig/.github/workflows/dependabot-issue.yaml@main
