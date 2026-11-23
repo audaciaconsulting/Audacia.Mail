@@ -468,6 +468,19 @@ public MandrillWebhookProvider(IMandrillService mandrillService, MandrillOptions
 }
 ```
 
+# Testing
+Automated tests live in `Audacia.Mail.Tests` (xUnit) and run in the build pipeline. Run them locally with:
+
+```
+dotnet test Audacia.Mail.Tests
+```
+
+The tests never send real email:
+- `MailKitClient` tests send real SMTP traffic to an in-process fake SMTP server on `127.0.0.1` and a random free port. The server only records messages and never relays them.
+- Mandrill tests use a fake `IMandrillService`, or a stub `HttpMessageHandler` for the dependency injection tests, so no request reaches `mandrillapp.com`. The API key is a dummy value.
+
+Test methods are named `MethodUnderTest_Scenario_ExpectedResult`.
+
 # Change History
 The `Audacia.Mail` repository change history can be found in this [changelog](./CHANGELOG.md)
 

@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.4.6 - 2026-11-23
+
+### Changed
+
+- Updated Microsoft.Extensions.DependencyInjection.Abstractions to version 10.0.15.
+- Updated Microsoft.Extensions.Http to version 10.0.15.
+- Updated System.Net.Http.Json to version 10.0.15.
+- Updated System.Text.Json to version 10.0.15.
+- Updated System.Security.Cryptography.Pkcs to version 10.0.15.
+- Resolved one `using` statement `warning as error` in Audacia.Mail project.
+
 ## 1.4.5 - 2026-11-02
 
 ### Added
