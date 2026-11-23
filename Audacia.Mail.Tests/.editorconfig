@@ -1,0 +1,36 @@
+# Test-project overrides layered on top of the repository .editorconfig.
+# Tests follow the MethodUnderTest_Scenario_ExpectedResult naming convention and favour
+# readable arrange/act/assert blocks over the production-code size limits.
+
+[*.cs]
+
+# Test names use underscores to separate method, scenario and expected result.
+dotnet_diagnostic.CA1707.severity = none
+
+# xUnit test methods are discovered by attribute; an 'Async' suffix adds noise to test names.
+dotnet_diagnostic.RCS1046.severity = none
+
+# Assert-heavy test methods and the fake SMTP command loop exceed the production statement limit.
+dotnet_diagnostic.ACL1002.severity = none
+
+# SMTP command verbs and literal test values are clearer inline than as named constants.
+dotnet_diagnostic.ACL1001.severity = none
+
+# Boolean switches on test fakes (e.g. whether the fake SMTP server advertises AUTH) are acceptable.
+dotnet_diagnostic.ACL1017.severity = none
+dotnet_diagnostic.AV1564.severity = none
+
+# Argument for parameter in method calls nested method - this is common in tests
+dotnet_diagnostic.AV1580.severity = none
+
+# xUnit1030 forbids ConfigureAwait(false) in tests, so CA2007 must be off.
+dotnet_diagnostic.CA2007.severity = none
+
+# JsonElement enumerators implement IDisposable but hold no resources; disposing them in assertions adds noise.
+dotnet_diagnostic.IDISP004.severity = none
+
+# DOC900: Render documentation as Markdown (Refactoring)
+dotnet_diagnostic.DOC900.severity = none
+
+# AV1715: Name of public or internal boolean identifier should start with a verb
+dotnet_diagnostic.AV1715.severity = none
