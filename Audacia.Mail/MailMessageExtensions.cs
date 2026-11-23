@@ -56,12 +56,10 @@ namespace Audacia.Mail
                 throw new ArgumentOutOfRangeException(nameof(stream), "End of stream reached.");
             }
 
-            using (var ms = new MemoryStream())
-            {
-                stream.CopyTo(ms);
-                stream.Position = 0;
-                return msg.Attach(ms.ToArray(), filename, mimeType);
-            }
+            using var ms = new MemoryStream();
+            stream.CopyTo(ms);
+            stream.Position = 0;
+            return msg.Attach(ms.ToArray(), filename, mimeType);
         }
 
         /// <summary>
