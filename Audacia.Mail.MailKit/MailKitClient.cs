@@ -114,9 +114,10 @@ namespace Audacia.Mail.MailKit
             }
 
             using var mimeMessage = CreateMimeMessage(message);
-
             await ConnectToClientAsync().ConfigureAwait(false);
-            await _client!.SendAsync(FormatOptions.Default, mimeMessage, CancellationToken.None).ConfigureAwait(false);
+
+            // This overload uses MailKit's default format options, which suppress the transmitted Bcc header; FormatOptions.Default does not.
+            await _client!.SendAsync(mimeMessage, CancellationToken.None).ConfigureAwait(false);
         }
 
         /// <summary>
