@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.7 - 2026-11-24
+
+### Fixed
+
+- Fixed an existing bug where BCC recipients could be visible.
+
 ## 1.4.6 - 2026-11-23
 
 ### Changed

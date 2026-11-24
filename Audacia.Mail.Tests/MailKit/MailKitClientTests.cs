@@ -73,7 +73,7 @@ public sealed class MailKitClientTests
             received.EnvelopeRecipients.OrderBy(address => address, StringComparer.Ordinal));
     }
 
-    [Fact(Skip = "Known bug: MailKitClient passes FormatOptions.Default to SmtpClient.SendAsync, which bypasses MailKit's default hiding of the Bcc header, so BCC addresses are visible to every recipient.")]
+    [Fact]
     public async Task SendAsync_WithBcc_DoesNotExposeBccAddressInTransmittedHeaders()
     {
         await using var server = new FakeSmtpServer();
